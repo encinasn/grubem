@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+      "baseUrl": ".",
+      "paths": {
+        "@feature/*": ["components/feature/*"],
+        "@layout/*": ["components/layout/*"],
+        "@shared/*": ["components/shared/*"],
+      }
+    }
+  }
