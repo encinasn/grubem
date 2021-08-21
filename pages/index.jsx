@@ -1,6 +1,10 @@
 import Head from 'next/head';
+import Separator from '@shared/Separator';
+import Section from '@shared/Section';
 import DogTypes from '@shared/DogTypes';
-import PostsList from '@shared/PostsList';
+import PostsList from '@shared/posts/PostsList';
+import Landing from '@feature/home/Landing';
+import TitleSection from '@shared/TitleSection';
 
 const HomePage = () => {
   return (
@@ -8,7 +12,21 @@ const HomePage = () => {
       <Head>
         <title>Criadero Grubem</title>
       </Head>
-      <DogTypes />
+      <Landing />
+
+      <Section margin="2rem 0">
+        <TitleSection variant="h2" section="ovejeros alemanes">
+          Nuestros Ejemplares
+        </TitleSection>
+        <DogTypes />
+      </Section>
+
+      <Section margin="2rem 0">
+        <TitleSection variant="h2" section="criadero">
+          Ultimas publicaciones
+        </TitleSection>
+        <Separator/>
+      </Section>
       <PostsList />
     </>
   );

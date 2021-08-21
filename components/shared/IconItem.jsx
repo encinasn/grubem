@@ -1,4 +1,4 @@
-import { FaBone, FaDog } from 'react-icons/fa';
+import { FaBone, FaDog, FaMapMarkerAlt } from 'react-icons/fa';
 
 const IconItem = ({ icon = '', title = 'Item' }) => {
   return (
@@ -7,6 +7,7 @@ const IconItem = ({ icon = '', title = 'Item' }) => {
         <div>
           {icon === '' && <FaBone size="1.6rem" />}
           {icon === 'dog' && <FaDog size="1.6rem" />}
+          {icon === 'location' && <FaMapMarkerAlt size="1.6rem" />}
         </div>
         <span>{title}</span>
       </li>
@@ -20,6 +21,7 @@ const IconItem = ({ icon = '', title = 'Item' }) => {
         }
         div {
           color: var(--red);
+          height: 1.6rem;
         }
         span {
           margin-left: 1.2rem;

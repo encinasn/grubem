@@ -1,7 +1,7 @@
 import { FaFacebookSquare } from 'react-icons/fa';
 import { AiFillInstagram } from 'react-icons/ai';
 
-const SocialMedia = ({ color }) => {
+const SocialMedia = () => {
   return (
     <>
       <div>
@@ -26,11 +26,12 @@ const SocialMedia = ({ color }) => {
           align-items: center;
           justify-content: center;
           width: 100%;
-          color: ${color ? 'var(--white)' : 'var(--black)'};
+          color: inherit;
         }
         a {
           padding: 0.4rem;
           cursor: pointer;
+          color: inherit;
         }
       `}</style>
     </>

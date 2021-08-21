@@ -1,5 +1,7 @@
 import Navbar from '@layout/Navbar';
 import Footer from '@layout/footer/Footer';
+// utils
+import { BREAKPOINTS } from 'utils/breakpoints';
 
 const Layout = ({ children }) => {
   const isMobile = () => {
@@ -12,12 +14,16 @@ const Layout = ({ children }) => {
     <>
       <Navbar />
       <main>{children}</main>
-      <Footer/>
+      <Footer />
 
       <style jsx>{`
         main {
-          padding-top: 7.2rem;
-          min-height: calc(100vh - 10rem);
+          min-height: calc(100vh - 14.5rem);
+        }
+        @media (min-width: ${BREAKPOINTS.tab}) {
+          main {
+            min-height: calc(100vh - 8.5rem);
+          }
         }
       `}</style>
     </>

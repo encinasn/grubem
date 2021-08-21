@@ -14,7 +14,7 @@ const Footer = () => {
       <style jsx>{`
         footer {
           width: 100vw;
-          padding: 2rem 0 4rem;
+          padding: 2rem 0;
         }
         div {
           display: grid;
@@ -32,7 +32,7 @@ const Footer = () => {
         @media screen and (min-width: ${BREAKPOINTS.tab}) {
           footer {
             padding: 0 10%;
-            padding-bottom: 4rem;
+            padding-bottom: 2rem;
           }
           div {
             grid-template: auto / 1fr auto;

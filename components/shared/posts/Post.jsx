@@ -1,18 +1,23 @@
 import Image from 'next/image';
+import { BREAKPOINTS } from 'utils/breakpoints';
+// hook
+import useTimeAgo from 'hooks/useTimeAgo';
 
 const Post = ({ post = {} }) => {
-  const { timeago, description } = post;
-  const image = '/images/brand/logo.png';
+  const { createdAt, description, picture } = post;
+  const image = '/images/photos/placeholder.png';
+
+  const timeago = useTimeAgo(createdAt);
   return (
     <>
       <li>
         <section className="header">
           <Image
             src="/images/brand/logo.png"
-            responsive="true"
             alt=""
             width={40}
             height={40}
+            layout="fixed"
           />
           <div>
             <span>Von der Grubem Land</span>
@@ -24,11 +29,12 @@ const Post = ({ post = {} }) => {
 
         <section className="image">
           <Image
-            src={image}
-            responsive="true"
+            src={picture}
             alt=""
             width={800}
             height={800}
+            layout="responsive"
+            objectFit="cover"
           />
         </section>
         <section className="actions">
@@ -41,6 +47,7 @@ const Post = ({ post = {} }) => {
         li {
           width: 100%;
           border-bottom: 1px solid var(--border);
+          max-width: 70rem;
         }
         .header {
           display: flex;
@@ -85,9 +92,28 @@ const Post = ({ post = {} }) => {
           background: none;
           border: none;
           font-size: 1.2rem;
+          cursor: pointer;
         }
         .actions > button:first-child {
           border-right: 1px solid var(--border);
+        }
+
+        @media screen and (min-width: ${BREAKPOINTS.tab}) {
+          li {
+            border-radius: var(--normal-radius);
+            margin-bottom: 2rem;
+            box-shadow: var(--normal-shadow);
+            background: var(--white);
+          }
+          .header > div {
+            font-size: 1.6rem;
+          }
+          .content {
+            font-size: 1.6rem;
+          }
+          .actions > button:hover {
+            background-color: var(--grey-100);
+          }
         }
       `}</style>
     </>

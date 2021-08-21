@@ -1,21 +1,39 @@
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { BREAKPOINTS } from 'utils/breakpoints';
+// icons
 import { HiMenuAlt3 } from 'react-icons/hi';
+// utils
+import { BREAKPOINTS } from 'utils/breakpoints';
 
 const Navbar = () => {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 60) setVisible(true);
+      if (window.scrollY < 60) setVisible(false);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
     <>
-      <nav>
+      <nav className={visible ? 'background' : 'transparent'}>
         <section>
           <Link href="/">
             <a>
               <Image
                 src="/images/brand/logo-horizontal.png"
                 alt="Escudo de Von der Grubem Land"
-                responsive="true"
                 width={250}
                 height={40}
+                layout="fixed"
               />
             </a>
           </Link>
@@ -32,7 +50,7 @@ const Navbar = () => {
             <a>Competencias</a>
           </Link>
           <Link href="/contacto">
-            <a>Contacto</a>
+            <a className="primary">Contacto</a>
           </Link>
         </section>
 
@@ -56,6 +74,15 @@ const Navbar = () => {
           background-color: var(--black);
 
           z-index: 50;
+          transition: background-color 0.2s linear;
+        }
+        nav.transparent {
+          color: var(--white);
+          background: none;
+        }
+        nav.background {
+          color: var(--white);
+          background-color: var(--black);
         }
 
         .navigation > a {
@@ -69,8 +96,8 @@ const Navbar = () => {
           background-color: rgb(255, 255, 255, 0.1);
         }
 
-        .navigation > a::last-child {
-          border: 2px solid var(--red);
+        .navigation > a.primary {
+          border: 1px solid var(--white);
         }
 
         .navigation {
