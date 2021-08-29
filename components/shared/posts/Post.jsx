@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import Image from 'next/image';
 import { BREAKPOINTS } from 'utils/breakpoints';
 // hook
@@ -5,7 +6,6 @@ import useTimeAgo from 'hooks/useTimeAgo';
 
 const Post = ({ post = {} }) => {
   const { createdAt, description, picture } = post;
-  const image = '/images/photos/placeholder.png';
 
   const timeago = useTimeAgo(createdAt);
   return (
@@ -26,17 +26,12 @@ const Post = ({ post = {} }) => {
         </section>
 
         {description && <p className="content">{description}</p>}
+        {picture && (
+          <section className="image">
+            <img src={picture} alt="" />
+          </section>
+        )}
 
-        <section className="image">
-          <Image
-            src={picture}
-            alt=""
-            width={800}
-            height={800}
-            layout="responsive"
-            objectFit="cover"
-          />
-        </section>
         <section className="actions">
           <button>Me gusta</button>
           <button>Compartir</button>
@@ -48,6 +43,7 @@ const Post = ({ post = {} }) => {
           width: 100%;
           border-bottom: 1px solid var(--border);
           max-width: 70rem;
+          background-color: var(--white);
         }
         .header {
           display: flex;
@@ -78,6 +74,12 @@ const Post = ({ post = {} }) => {
           border-top: 1px solid var(--border);
           width: 100%;
           height: auto;
+        }
+        .image > img {
+          width: 100%;
+          height: auto;
+          object-fit: cover;
+          object-position: center;
         }
 
         .actions {

@@ -1,7 +1,7 @@
 const TextareaPost = ({ name, placeholder, disabled, onChange, onDrop }) => {
   const handleDrop = (e) => {
     e.preventDefault();
-    onDrop(e.dataTransfer.files[0]);
+    onDrop(e.dataTransfer.files[0], 'posts');
   };
   
   return (

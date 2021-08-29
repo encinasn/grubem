@@ -13,9 +13,13 @@ const Footer = () => {
 
       <style jsx>{`
         footer {
+          right: 0;
           width: 100vw;
           padding: 2rem 0;
+          background-color: var(--white);
+          z-index: 2;
         }
+
         div {
           display: grid;
           grid-template: 1fr 1fr / auto;

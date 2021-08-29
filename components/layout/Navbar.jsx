@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 // icons
-import { HiMenuAlt3 } from 'react-icons/hi';
+import { HiMenu, HiX } from 'react-icons/hi';
 // utils
 import { BREAKPOINTS } from 'utils/breakpoints';
 
-const Navbar = () => {
+const Navbar = ({ active, setActive }) => {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -22,9 +22,15 @@ const Navbar = () => {
     };
   }, []);
 
+  const handleClick = () => setActive(!active);
+
   return (
     <>
-      <nav className={visible ? 'background' : 'transparent'}>
+      <nav
+        className={`${visible ? 'background' : 'transparent'} ${
+          active ? 'active' : ''
+        } `}
+      >
         <section>
           <Link href="/">
             <a>
@@ -39,83 +45,60 @@ const Navbar = () => {
           </Link>
         </section>
 
-        <section className="navigation">
-          <Link href="/">
-            <a>Inicio</a>
-          </Link>
-          <Link href="/noticias">
-            <a>Noticias</a>
-          </Link>
-          <Link href="/competencias">
-            <a>Competencias</a>
-          </Link>
-          <Link href="/contacto">
-            <a className="primary">Contacto</a>
-          </Link>
-        </section>
-
-        <section className="hamburger">
-          <HiMenuAlt3 size="2.4rem" />
+        <section
+          className={`toggle ${active ? 'active' : ''}`}
+          onClick={handleClick}
+        >
+          {active ? <HiX size="4rem" /> : <HiMenu size="4rem" />}
         </section>
       </nav>
 
       <style jsx>{`
+        .toggle {
+          width: 4rem;
+          height: 4rem;
+          cursor: pointer;
+        }
+        .toggle.active {
+          cursor: pointer;
+        }
+
         nav {
           position: fixed;
           top: 0;
+          right: 0;
 
-          display: grid;
-          grid-template-columns: 1fr auto;
+          display: flex;
+          justify-content: space-between;
           align-items: center;
-          height: 7.2rem;
+          height: 10rem;
           width: 100vw;
           padding: 0 var(--mobile-padding);
           color: var(--white);
           background-color: var(--black);
-
           z-index: 50;
-          transition: background-color 0.2s linear;
+          transition: all 0.2s linear, right 0.5s ease;
+        }
+        nav.active {
+          right: 28rem;
         }
         nav.transparent {
+          height: 10rem;
           color: var(--white);
           background: none;
         }
         nav.background {
+          height: 7.2rem;
           color: var(--white);
           background-color: var(--black);
-        }
-
-        .navigation > a {
-          padding: 1.2rem 1.6rem;
-          font-weight: 500;
-          font-size: 1.4rem;
-          border-radius: var(--normal-radius);
-          cursor: pointer;
-        }
-        .navigation > a:hover {
-          background-color: rgb(255, 255, 255, 0.1);
-        }
-
-        .navigation > a.primary {
-          border: 1px solid var(--white);
-        }
-
-        .navigation {
-          display: none;
-        }
-        .hamburger {
-          padding: 0.8rem;
         }
 
         @media screen and (min-width: ${BREAKPOINTS.tab}) {
           nav {
             padding: 0 var(--desktop-padding);
           }
-          .hamburger {
-            display: none;
-          }
-          .navigation {
-            display: block;
+          nav.active {
+            padding: 0 2rem;
           }
         }
       `}</style>

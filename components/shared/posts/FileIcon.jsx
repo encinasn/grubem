@@ -14,7 +14,7 @@ const FileIcon = ({ name, disabled, onChange }) => {
   // };
 
   const imageHandler = (e) => {
-    onChange(e.target.files[0]);
+    onChange(e.target.files[0], 'posts');
   };
 
   return (

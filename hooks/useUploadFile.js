@@ -21,8 +21,8 @@ const useUploadFile = () => {
     }
   }, [task]);
 
-  const upload = (file) => {
-    const task = uploadImage(file);
+  const upload = (file, folder) => {
+    const task = uploadImage(file, folder);
     setTask(task);
     setLoading(true);
   };

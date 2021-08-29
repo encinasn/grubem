@@ -1,11 +1,16 @@
 import Post from '@shared/posts/Post';
+import Loading from '@shared/Loading';
 // utils
 import { BREAKPOINTS } from 'utils/breakpoints';
 // hooks
 import usePosts from 'hooks/usePosts';
 
-const PostsList = () => {
-  const { posts, loading, error } = usePosts();
+const PostsList = ({ preloadPosts }) => {
+  const { posts, loading, error } = usePosts(preloadPosts);
+
+  if (loading.get) return <Loading />;
+
+  if (error.get) return <h2>Ocurrio un error inesperado</h2>;
 
   return (
     <>

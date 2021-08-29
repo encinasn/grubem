@@ -1,8 +1,8 @@
 import Head from 'next/head';
 import '../styles/globals.css';
-import Layout from '@layout/Layout';
 
 export default function App({ Component, pageProps }) {
+  const getLayout = Component.getLayout || ((page) => page);
 
   return (
     <>
@@ -12,9 +12,8 @@ export default function App({ Component, pageProps }) {
           content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
         />
       </Head>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+
+      {getLayout(<Component {...pageProps} />)}
     </>
   );
 }

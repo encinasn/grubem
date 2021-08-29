@@ -1,11 +1,18 @@
 import { BREAKPOINTS } from 'utils/breakpoints';
 
-const TitleSection = ({ section, children, variant = 'h1' }) => {
+const TitleSection = ({
+  section,
+  children,
+  variant = 'h1',
+  separator = true,
+}) => {
   return (
     <>
       <div>
         {section && <h3>{section}</h3>}
-        <span className={variant === 'h1' ? 'large' : 'small'} />
+        {separator && (
+          <span className={variant === 'h1' ? 'large' : 'small'} />
+        )}
         {variant === 'h1' && <h1>{children}</h1>}
         {variant === 'h2' && <h2>{children}</h2>}
       </div>
@@ -41,7 +48,7 @@ const TitleSection = ({ section, children, variant = 'h1' }) => {
         }
 
         h2 {
-          font-size: 2rem;
+          font-size: 2.4rem;
           font-weight: 600;
           line-height: 3rem;
           color: inherit;
@@ -51,7 +58,8 @@ const TitleSection = ({ section, children, variant = 'h1' }) => {
           text-transform: uppercase;
           font-weight: 500;
           color: var(--red);
-          letter-spacing: 0.2rem
+          letter-spacing: 0.2rem;
+          font-size: 1.2rem;
         }
 
         @media screen and (min-width: ${BREAKPOINTS.tab}) {
@@ -64,6 +72,9 @@ const TitleSection = ({ section, children, variant = 'h1' }) => {
             font-weight: 600;
             line-height: 5rem;
             color: inherit;
+          }
+          h3 {
+            font-size: 1.6rem;
           }
         }
       `}</style>

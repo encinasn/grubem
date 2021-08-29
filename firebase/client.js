@@ -18,11 +18,19 @@ const firebaseConfig = {
 const db = firebase.firestore();
 
 // auth
+const normailizeUser = (user) => {
+  if (user) {
+    const { email, photoURL } = user;
+    return { email, photoURL };
+  }
+  return null;
+};
 
 export const onAuthStateChanged = (onChange) => {
   return firebase.auth().onAuthStateChanged((user) => {
-    console.log('AuthStateChange', user);
-    onChange(user);
+    const normUser = normailizeUser(user);
+    console.log('AuthStateChange', normUser);
+    onChange(normUser);
   });
 };
 
@@ -56,26 +64,52 @@ export const getPosts = () => {
     });
 };
 
-// dog
+// dogs
 
-export const addDog = ({ name, picture = null, gender, dateOfBirth }) => {
+const getRealDate = (date) => {
+  const dateArray = date.split('-');
+  return new Date(dateArray[0], dateArray[1] - 1, dateArray[2]);
+};
+
+export const addDog = (data) => {
   return db.collection('dogs').add({
-    name,
-    picture,
-    gender,
-    dateOfBirth,
-    isPuppy,
-    selection,
-    femaleParent,
-    maleParent,
-    elbowPlate,
-    hipPlate,
-    pedegree,
+    ...data,
+    dateOfBirth: getRealDate(data.dateOfBirth),
     createdAt: firebase.firestore.Timestamp.fromDate(new Date()),
   });
 };
 
-export const uploadImage = (file) => {
-  const storageRef = firebase.storage().ref().child(`images/${file.name}`);
+const normalizeDogs = (dogs) => {
+  const female = dogs.filter((dog) => dog.gender === 'female' && !dog.isPuppy);
+  const male = dogs.filter((dog) => dog.gender === 'male' && !dog.isPuppy);
+  const puppy = dogs.filter((dog) => dog.isPuppy === true);
+
+  return { female, male, puppy };
+};
+
+export const getDogs = () => {
+  return db
+    .collection('dogs')
+    .get()
+    .then((snapshot) => {
+      const dogs = snapshot.docs.map((doc) => {
+        const data = doc.data();
+        const id = doc.id;
+        const { dateOfBirth, createdAt } = data;
+
+        return {
+          ...data,
+          id,
+          dateOfBirth: +dateOfBirth.toDate(),
+          createdAt: +createdAt.toDate(),
+        };
+      });
+
+      return normalizeDogs(dogs);
+    });
+};
+
+export const uploadImage = (file, folder) => {
+  const storageRef = firebase.storage().ref().child(`${folder}/${file.name}`);
   return storageRef.put(file);
 };

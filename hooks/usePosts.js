@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
 // services
 import { getPosts, addPost} from 'firebase/client';
 
@@ -11,15 +10,14 @@ const INITIAL_STATE = {
   update: false,
 }
 
-const usePosts = () => {
-  const router = useRouter();
-  const [posts, setPosts] = useState([]);
+const usePosts = (preloadPosts = []) => {
+  const [posts, setPosts] = useState(preloadPosts);
   const [loading, setLoading] = useState(INITIAL_STATE);
   const [error, setError] = useState(INITIAL_STATE);
   const [success, setSuccess] = useState(INITIAL_STATE);
 
   useEffect(() => {
-    getAllPosts();
+    if (!posts.length) getAllPosts();
   }, []);
 
   const getAllPosts = async () => {

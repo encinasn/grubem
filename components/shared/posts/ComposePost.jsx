@@ -11,27 +11,22 @@ import { BREAKPOINTS } from 'utils/breakpoints';
 import usePosts from 'hooks/usePosts';
 import useUploadFile from 'hooks/useUploadFile';
 
-const ComposePost = () => {
+const ComposePost = ({ closeModal }) => {
   const [content, setContent] = useState('');
 
-  const {
-    imgUrl,
-    loading: imgLoading,
-    upload,
-    deleteImg,
-  } = useUploadFile();
+  const { imgUrl, upload, deleteImg } = useUploadFile();
 
   const { createPost, loading, error } = usePosts();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    createPost({ description: content, picture: imgUrl });
+    await createPost({ description: content, picture: imgUrl });
+    if (!error.create) closeModal();
   };
 
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <h1>Crear publicación</h1>
         <section className="header">
           <Image
             src="/images/brand/logo.png"
@@ -75,13 +70,7 @@ const ComposePost = () => {
 
       <style jsx>{`
         form {
-          width: 100%;
-          max-width: 70rem;
-        }
-
-        h1 {
-          margin-bottom: 20px;
-          font-size: 2.4rem;
+          padding: 1.6rem;
         }
 
         span {
@@ -92,7 +81,7 @@ const ComposePost = () => {
         .header {
           display: flex;
           align-items: center;
-          padding: 0.8rem 1.2rem;
+          padding: 0.8rem;
         }
         .header > span {
           margin-left: 1.2rem;
@@ -109,13 +98,6 @@ const ComposePost = () => {
         }
 
         @media screen and (min-width: ${BREAKPOINTS.tab}) {
-          form {
-            padding: 2.8rem 2rem;
-            border-radius: var(--normal-radius);
-            margin-bottom: 2rem;
-            box-shadow: var(--normal-shadow);
-            background: var(--white);
-          }
           .header > div {
             font-size: 1.6rem;
           }

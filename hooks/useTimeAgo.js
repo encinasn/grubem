@@ -1,4 +1,6 @@
 const DATE_UNITS = [
+  ['year', 31556900],
+  ['month', 2629750],
   ['week', 604800],
   ['day', 86400],
   ['hour', 3600],
@@ -21,7 +23,7 @@ const getDateDiffs = (timestamp) => {
 const useTimeAgo = (timestamp) => {
   const { value, unit } = getDateDiffs(timestamp);
   const rtf = new Intl.RelativeTimeFormat('es', {
-    style: 'short',
+    style: 'long',
   });
   return rtf.format(value, unit);
 };

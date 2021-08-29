@@ -56,8 +56,8 @@ selector {
   --small-height: 2.4rem;
 
   /*Fuente y tipografia */
-  --title-font: "Poppins", sans-serif;
-  --body-font: "Poppins", sans-serif;
+  --title-font: 'Poppins', sans-serif;
+  --body-font: 'Poppins', sans-serif;
 
   --xlarge-size: 1.8rem;
   --large-size: 1.6rem;
@@ -66,7 +66,7 @@ selector {
   --xsmall-size: 1rem;
 
   /* Layout */
-  --mobile-padding: 1.6rem;
+  --mobile-padding: 2rem;
   --desktop-padding: 10%;
 
   scroll-behavior: smooth;
@@ -154,13 +154,13 @@ td {
   vertical-align: middle;
 }
 
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-/* ================== UI KIT ================== 
+/* ================== UI KIT ================== */
 
 @media (min-width: 1000px) {
   ::-webkit-scrollbar {
@@ -173,14 +173,45 @@ input[type="number"]::-webkit-outer-spin-button {
   }
 
   ::-webkit-scrollbar-thumb {
-    background: var(--mid-gray);
+    background: var(--grey-500);
     border-radius: 100px;
-    border: 4px solid var(--white-color);
+    border: 4px solid var(--white);
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: var(--bold-gray);
+    background: var(--grey-700);
+  }
+
+  /* hover */
+  .scroll_hover {
+    mask-image: linear-gradient(to top, transparent, black),
+      linear-gradient(to left, transparent 17px, black 17px);
+    mask-size: 100% 20000px;
+    mask-position: left bottom;
+    -webkit-mask-image: linear-gradient(to top, transparent, black),
+      linear-gradient(to left, transparent 17px, black 17px);
+    -webkit-mask-size: 100% 20000px;
+    -webkit-mask-position: left bottom;
+    transition: mask-position 0.3s, -webkit-mask-position 0.3s;
+  }
+  .scroll_hover:hover {
+    -webkit-mask-position: left top;
+  }
+  .scroll_hover::-webkit-scrollbar {
+    opacity: 0;
+  }
+
+  .scroll_hover::-webkit-scrollbar-track {
+    background: none;
+  }
+
+  .scroll_hover::-webkit-scrollbar-thumb {
+    background: var(--grey-500);
+    border-radius: 100px;
+    border: 4px solid var(--white);
+  }
+
+  .scroll_hover::-webkit-scrollbar-thumb:hover {
+    background: var(--grey-700);
   }
 }
-
-*/

@@ -9,7 +9,7 @@ const Spinner = () => {
           width: 36px;
           height: 36px;
           border-radius: 50%;
-          border-left-color: var(--first-yellow);
+          border-left-color: var(--red);
 
           animation: spin 1s ease infinite;
         }

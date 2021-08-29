@@ -6,18 +6,18 @@ const SocialMedia = () => {
     <>
       <div>
         <a
-          href="https://www.instagram.com/grubemland/"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <AiFillInstagram size="2.4rem" />
-        </a>
-        <a
           href="https://www.facebook.com/Von-Der-GRubEm-Land-ovejeros-alemanes-102577168234266/"
           target="_blank"
           rel="noreferrer"
         >
-          <FaFacebookSquare size="2rem" />
+          <FaFacebookSquare size="2.4rem" />
+        </a>
+        <a
+          href="https://www.instagram.com/grubemland/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <AiFillInstagram size="2.8rem" />
         </a>
       </div>
       <style jsx>{`
@@ -28,10 +28,16 @@ const SocialMedia = () => {
           width: 100%;
           color: inherit;
         }
+
         a {
-          padding: 0.4rem;
+          display: inline-block;
+          margin-right: 2.4rem;
+          transition: 0.3s;
           cursor: pointer;
           color: inherit;
+        }
+        a:hover {
+          transform: translateY(-1rem);
         }
       `}</style>
     </>
