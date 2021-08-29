@@ -1,35 +1,50 @@
-import Head from "next/head";
-import Image from "next/image";
+import Head from 'next/head';
+// layout
+import Layout from '@layout/Layout';
+// components
+import Separator from '@shared/Separator';
+import Section from '@shared/Section';
+import PostsList from '@shared/posts/PostsList';
+import LandingVideo from '@feature/home/LandingVideo';
+import TitleSection from '@shared/TitleSection';
+import CarrouselSection from '@feature/home/CarrouselSection';
+// services
+import { getDogs, getPosts } from 'firebase/client';
 
-const HomePage = () => {
+const HomePage = ({ posts, dogs }) => {
   return (
     <>
       <Head>
         <title>Criadero Grubem</title>
       </Head>
-      <div>
-        <Image src="/logo.png" alt="" width={220} height={220} />
-        <h3>Servicio en mantenimiento</h3>
-      </div>
-      <style jsx>{`
-        div {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-direction: column;
-          width: 100vw;
-          height: 100vh;
-          background-color: #202020;
-        }
+      <LandingVideo />
 
-        h3 {
-          font-family: ${`Poppins, sans-serif`};
-          font-weight: normal;
-          color: #cdcdcd;
-        }
-      `}</style>
+      <CarrouselSection preloadDogs={dogs} />
+
+      <Section top="3rem" bottom="1rem">
+        <Separator />
+        <TitleSection variant="h2" section="criadero">
+          Ultimas publicaciones
+        </TitleSection>
+      </Section>
+
+      <PostsList preloadPosts={posts} />
     </>
   );
 };
 
+HomePage.getLayout = (page) => <Layout>{page}</Layout>;
+
 export default HomePage;
+
+export async function getStaticProps(context) {
+  const posts = await getPosts();
+  const dogs = await getDogs();
+
+  return {
+    props: {
+      posts,
+      dogs
+    },
+  };
+}
