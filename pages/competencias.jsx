@@ -5,23 +5,22 @@ import Layout from '@layout/Layout';
 import Section from '@shared/Section';
 import TitleSection from '@shared/TitleSection';
 
-
 const CompetenciesPage = () => {
   return (
     <>
-      <Head>
-        <title>Competencias | Criadero Grubem</title>
-      </Head>
+      <Layout>
+        <Head>
+          <title>Competencias | Criadero Grubem</title>
+        </Head>
 
-      <Section top="10rem" bottom="1rem">
-        <TitleSection variant="h2" section="criadero">
-          Competencias
-        </TitleSection>
-      </Section>
+        <Section top="10rem" bottom="1rem">
+          <TitleSection variant="h2" section="criadero">
+            Competencias
+          </TitleSection>
+        </Section>
+      </Layout>
     </>
   );
 };
-
-CompetenciesPage.getLayout = (page) => <Layout>{page}</Layout>;
 
 export default CompetenciesPage;

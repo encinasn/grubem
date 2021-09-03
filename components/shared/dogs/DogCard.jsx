@@ -5,28 +5,31 @@ import { BREAKPOINTS } from 'utils/breakpoints';
 // hook
 import useTimeAgo from 'hooks/useTimeAgo';
 
+const no_op = () => {};
+
 const DogCard = ({
   picture = '/images/photos/landing.jpg',
   name = 'Von der Grubem Land',
   dateOfBirth = 1630163183,
   gender = 'male',
+  onClick = no_op,
 }) => {
 
   const dogGender = gender === 'female' ? 'Hembra' : 'Macho'
 
   const timeago = useTimeAgo(dateOfBirth);
-  const age = timeago.replace('hace', 'Edad')
+  const age = timeago.replace('hace', '')
 
   return (
     <>
-      <li>
+      <li onClick={onClick}>
         <div className="picture">
           <img src={picture} alt={`Fotografia de ${name}`} />
         </div>
 
         <div className="info">
           <h3>{name}</h3>
-          <p>{`${age} • ${dogGender}`}</p>
+          <p>{`${dogGender} • ${age}`}</p>
         </div>
       </li>
 

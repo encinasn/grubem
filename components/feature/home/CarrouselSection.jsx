@@ -1,7 +1,7 @@
 import Separator from '@shared/Separator';
 import Section from '@shared/Section';
 import TitleSection from '@shared/TitleSection';
-import Carrousel from '@shared/dogs/Carrousel';
+import Carrousel from '@feature/home/Carrousel';
 // hook
 import useDogs from 'hooks/useDogs';
 
@@ -17,7 +17,7 @@ const CarrouselSection = ({ preloadDogs }) => {
               Machos
             </TitleSection>
           </Section>
-          <Carrousel data={dogs.male} />
+          <Carrousel data={dogs.male} type="male"/>
         </>
       )}
 
@@ -29,7 +29,7 @@ const CarrouselSection = ({ preloadDogs }) => {
               Hembras
             </TitleSection>
           </Section>
-          <Carrousel data={dogs.female} />
+          <Carrousel data={dogs.female} type="female" />
         </>
       )}
 
@@ -41,9 +41,9 @@ const CarrouselSection = ({ preloadDogs }) => {
               Cachorros
             </TitleSection>
           </Section>
-          <Carrousel data={dogs.puppy} />
+          <Carrousel data={dogs.puppy} type="puppy"/>
         </>
-      )}
+      )}      
     </>
   );
 };
