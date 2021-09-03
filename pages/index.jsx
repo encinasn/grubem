@@ -14,26 +14,26 @@ import { getDogs, getPosts } from 'firebase/client';
 const HomePage = ({ posts, dogs }) => {
   return (
     <>
-      <Head>
-        <title>Criadero Grubem</title>
-      </Head>
-      <LandingVideo />
+      <Layout>
+        <Head>
+          <title>Criadero Grubem</title>
+        </Head>
+        <LandingVideo />
 
-      <CarrouselSection preloadDogs={dogs} />
+        <CarrouselSection preloadDogs={dogs} />
 
-      <Section top="3rem" bottom="1rem">
-        <Separator />
-        <TitleSection variant="h2" section="criadero">
-          Ultimas publicaciones
-        </TitleSection>
-      </Section>
+        <Section top="3rem" bottom="1rem">
+          <Separator />
+          <TitleSection variant="h2" section="criadero">
+            Ultimas publicaciones
+          </TitleSection>
+        </Section>
 
-      <PostsList preloadPosts={posts} />
+        <PostsList preloadPosts={posts} />
+      </Layout>
     </>
   );
 };
-
-HomePage.getLayout = (page) => <Layout>{page}</Layout>;
 
 export default HomePage;
 
@@ -44,7 +44,7 @@ export async function getStaticProps(context) {
   return {
     props: {
       posts,
-      dogs
+      dogs,
     },
   };
 }

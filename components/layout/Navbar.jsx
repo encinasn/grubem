@@ -6,8 +6,9 @@ import { HiMenu, HiX } from 'react-icons/hi';
 // utils
 import { BREAKPOINTS } from 'utils/breakpoints';
 
-const Navbar = ({ active, setActive }) => {
+const Navbar = () => {
   const [visible, setVisible] = useState(false);
+  const [active, setActive] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,70 +28,156 @@ const Navbar = ({ active, setActive }) => {
   return (
     <>
       <nav
-        className={`${visible ? 'background' : 'transparent'} ${
+        className={`${!visible && !active ? 'transparent' : 'background'} ${
           active ? 'active' : ''
-        } `}
+        }`}
       >
-        <section>
-          <Link href="/">
-            <a>
+        <div className="nav-layout">
+          <section>
+            <Link href="/">
+              <a>
+                <Image
+                  src="/images/brand/logo-horizontal.png"
+                  alt="Escudo de Von der Grubem Land"
+                  width={250}
+                  height={40}
+                  layout="fixed"
+                  priority
+                />
+              </a>
+            </Link>
+          </section>
+
+          <section
+            className={`toggle ${active ? 'active' : ''}`}
+            onClick={handleClick}
+          >
+            {active ? <HiX size="4rem" /> : <HiMenu size="4rem" />}
+          </section>
+        </div>
+
+        <div className={`menu ${active ? 'active' : ''}`}>
+          <ul>
+            <li>
+              <Link href="/">
+                <a>Inicio</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/competencias">
+                <a>Competencias</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/aprender">
+                <a>Aprender</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/contacto">
+                <a>Contacto</a>
+              </Link>
+            </li>
+          </ul>
+
+          <Link href="/admin/ingresar">
+            <a className="admin">
               <Image
-                src="/images/brand/logo-horizontal.png"
+                src="/images/brand/logo.png"
                 alt="Escudo de Von der Grubem Land"
-                width={250}
-                height={40}
+                width={120}
+                height={120}
                 layout="fixed"
               />
             </a>
           </Link>
-        </section>
-
-        <section
-          className={`toggle ${active ? 'active' : ''}`}
-          onClick={handleClick}
-        >
-          {active ? <HiX size="4rem" /> : <HiMenu size="4rem" />}
-        </section>
+        </div>
       </nav>
 
       <style jsx>{`
-        .toggle {
-          width: 4rem;
-          height: 4rem;
-          cursor: pointer;
-        }
-        .toggle.active {
-          cursor: pointer;
-        }
+        /* Navbar */
 
         nav {
           position: fixed;
           top: 0;
-          right: 0;
 
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          height: 10rem;
+          height: max-content;
+          max-height: 100vh;
           width: 100vw;
           padding: 0 var(--mobile-padding);
           color: var(--white);
           background-color: var(--black);
           z-index: 50;
-          transition: all 0.2s linear, right 0.5s ease;
         }
-        nav.active {
-          right: 28rem;
+        nav > .nav-layout {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          height: 10rem;
+          width: 100%;
+          transition: all 0.2s linear;
         }
-        nav.transparent {
+        nav.transparent > .nav-layout {
           height: 10rem;
           color: var(--white);
+        }
+        nav.background > .nav-layout {
+          height: 7.2rem;
+          color: var(--white);
+        }
+
+        nav.transparent {
           background: none;
         }
         nav.background {
-          height: 7.2rem;
-          color: var(--white);
-          background-color: var(--black);
+          background-color: rgba(0, 0, 0, 0.9);
+        }
+
+        .menu {
+          display: none;
+        }
+
+        @media screen and (max-width: ${BREAKPOINTS.tab}) {
+          .toggle {
+            width: 4rem;
+            height: 4rem;
+            cursor: pointer;
+          }          
+
+          /* Menu */
+          .menu {
+            position: relative;
+            top: 0;
+
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            height: calc(100vh - 7.2rem);
+            padding: 0 0 12rem;
+            transition: all 0.3s linear;
+          }
+          .menu.active {
+            display: flex;
+            padding-top: 6rem;
+            bottom: 0;
+          }
+          .menu .admin {
+            cursor: default;
+          }
+
+          .menu ul li {
+            margin: 2rem 0;
+          }
+          .menu ul li a {
+            font-size: 3.2rem;
+            color: var(--white);
+          }
+          .menu ul li a:hover {
+            color: var(--red);
+          }
+
+  
         }
 
         @media screen and (min-width: ${BREAKPOINTS.tab}) {

@@ -5,23 +5,22 @@ import Layout from '@layout/Layout';
 import Section from '@shared/Section';
 import TitleSection from '@shared/TitleSection';
 
-
 const LearnPage = () => {
   return (
     <>
-      <Head>
-        <title>Aprender | Criadero Grubem</title>
-      </Head>
+      <Layout>
+        <Head>
+          <title>Aprender | Criadero Grubem</title>
+        </Head>
 
-      <Section top="10rem" bottom="1rem">
-        <TitleSection variant="h2" section="criadero">
-        Aprender
-        </TitleSection>
-      </Section>
+        <Section top="10rem" bottom="1rem">
+          <TitleSection variant="h2" section="criadero">
+            Aprender
+          </TitleSection>
+        </Section>
+      </Layout>
     </>
   );
 };
-
-LearnPage.getLayout = (page) => <Layout>{page}</Layout>;
 
 export default LearnPage;

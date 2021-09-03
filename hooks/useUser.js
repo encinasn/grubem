@@ -22,7 +22,7 @@ const useUser = () => {
   }, []);
 
   useEffect(() => {
-    !user && router.replace('/admin/iniciar-sesion')
+    !user && router.replace('/admin/iniciar')
   }, []);
 
   const loginUser = async (email, password) => {

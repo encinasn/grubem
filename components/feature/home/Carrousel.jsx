@@ -1,6 +1,10 @@
+import { useState } from 'react';
+import { useRouter } from 'next/router';
 import Carrousel from 'react-elastic-carousel';
 // components
-import DogCard from './DogCard';
+import DogCard from '../../shared/dogs/DogCard';
+import Modal from '@feature/modal/ModalDogInfo';
+import DogInfo from '@feature/dogInfo/DogInfo';
 // utils
 import { BREAKPOINTS } from 'utils/breakpoints';
 
@@ -30,14 +34,26 @@ const recBreakPoints = [
   },
 ];
 
-const CarrouselDogs = ({ data = [] }) => {
+const CarrouselDogs = ({ data, type }) => {
+  const [modalData, setModalData] = useState(false);
+
+  const router = useRouter();
+  const modal = !!router.query[`${type}_id`];
+
+  const openModal = (id) =>
+    router.push(`/?${type}_id=${id}`, undefined, { shallow: true });
+  const closeModal = () => router.push('/', undefined, { shallow: true });
+
+  const handleClick = (dog) => {
+    setModalData(dog)
+    openModal(dog.id);
+  };
+
   const isMobile = () => {
     if (typeof window !== 'undefined') {
       return window.innerWidth < 600;
     }
   };
-
-  //const data = [1, 2, 3, 4, 5, 6];
 
   return (
     <>
@@ -46,8 +62,8 @@ const CarrouselDogs = ({ data = [] }) => {
           breakPoints={recBreakPoints}
           transitionMs={400}
           pagination={false}
+          enableMouseSwipe={false}
           showArrows={!isMobile()}
-          //itemPadding={[0, 12, 0, 32]}
           focusOnSelect={true}
         >
           {data.map((dog) => (
@@ -56,10 +72,15 @@ const CarrouselDogs = ({ data = [] }) => {
               name={dog.name}
               dateOfBirth={dog.dateOfBirth}
               gender={dog.gender}
+              onClick={() => handleClick(dog)}
             />
           ))}
         </Carrousel>
       </div>
+
+      <Modal title="" isOpen={modal} closeModal={closeModal}>
+        <DogInfo data={modalData} />
+      </Modal>
 
       <style jsx global>{`
         .carrousel_wrapper {

@@ -1,6 +1,6 @@
 import { createPortal } from 'react-dom';
 // icons
-import { FaTimes } from 'react-icons/fa';
+import { HiX } from 'react-icons/hi';
 // utils
 import { BREAKPOINTS } from 'utils/breakpoints';
 // hooks
@@ -9,7 +9,6 @@ import useLockBodyScroll from 'hooks/useLockBodyScroll';
 const ModalWrapper = ({
   closeModal,
   children,
-  title,
   width = '36vw',
   height = '80vh',
 }) => {
@@ -20,14 +19,15 @@ const ModalWrapper = ({
       <div className="modal__wrapper">
         <div className="modal__background" onClick={closeModal} />
         <div className="modal__content">
-          <header className="title">
-            <h2>{title}</h2>
-            <div className="modal__close" onClick={closeModal}>
-              <FaTimes size="1.6rem" />
-            </div>
-          </header>
+          <div className="modal__relative">
+            <header>
+              <div className="modal__close" onClick={closeModal}>
+                <HiX size="2.8rem" />
+              </div>
+            </header>
 
-          {children}
+            {children}
+          </div>
         </div>
       </div>
 
@@ -49,15 +49,12 @@ const ModalWrapper = ({
         }
 
         header {
-          position: relative;
+          position: absolute;
+          top: 0;
           width: 100%;
-          padding: 1.2rem;
-        }
-        header.title {
-          border-bottom: 1px solid var(--border);
-        }
-        header.transparent {
-          height: 4rem;
+          height: 6rem;
+          color: var(--white);
+          z-index: 100;
         }
 
         @keyframes introOpacity {
@@ -75,13 +72,13 @@ const ModalWrapper = ({
           right: 0;
           left: 0;
 
-          max-height: calc(${height} + 10vh);
+          max-height: calc(${height} + 5vh);
           width: 100%;
           height: 100%;
           padding-bottom: 0;
           z-index: 200;
           background-color: var(--white);
-          border-radius: var(--large-radius) var(--large-radius) 0 0;
+          border-radius: 16px 16px 0 0;
           overflow-y: auto;
           -webkit-overflow-scrolling: touch;
 
@@ -101,16 +98,22 @@ const ModalWrapper = ({
           }
         }
 
+        .modal__relative {
+          position: relative;
+          width: 100%;
+          height: 100%;
+        }
+
         .modal__close {
           position: absolute;
           top: 50%;
-          right: 0.8rem;
+          right: 1.2rem;
 
           display: flex;
           align-items: center;
           justify-content: center;
-          height: 2.8rem;
-          width: 2.8rem;
+          height: 3.2rem;
+          width: 3.2rem;
           background: none;
           border-radius: 50%;
           cursor: pointer;
@@ -118,7 +121,7 @@ const ModalWrapper = ({
           transform: translateY(-50%);
         }
         .modal__close:hover {
-          background-color: rgb(0, 0, 0, 0.05);
+          background-color: rgb(0, 0, 0, 0.2);
         }
 
         @media (min-width: ${BREAKPOINTS.tab}) {
@@ -148,7 +151,8 @@ const ModalWrapper = ({
           .modal__content {
             position: relative;
             max-height: ${height};
-            max-width: ${width};
+            min-width: 50rem;
+            max-width: 36vw;
             margin-top: 2rem;
             overflow: auto;
             box-shadow: var(--modal-shadow);

@@ -5,16 +5,18 @@ const TitleSection = ({
   children,
   variant = 'h1',
   separator = true,
+  margin = '2rem',
 }) => {
   return (
     <>
       <div>
-        {section && <h3>{section}</h3>}
+        {section && <h4>{section}</h4>}
         {separator && (
           <span className={variant === 'h1' ? 'large' : 'small'} />
         )}
         {variant === 'h1' && <h1>{children}</h1>}
         {variant === 'h2' && <h2>{children}</h2>}
+        {variant === 'h3' && <h3>{children}</h3>}
       </div>
 
       <style jsx>{`
@@ -22,7 +24,7 @@ const TitleSection = ({
           display: flex;
           flex-direction: column;
           justify-content: center;
-          margin-bottom: 2rem;
+          margin-bottom: ${margin};
         }
 
         span {
@@ -53,8 +55,14 @@ const TitleSection = ({
           line-height: 3rem;
           color: inherit;
         }
-
         h3 {
+          font-size: 2.4rem;
+          font-weight: 600;
+          line-height: 3rem;
+          color: inherit;
+        }
+
+        h4 {
           text-transform: uppercase;
           font-weight: 500;
           color: var(--red);
@@ -74,6 +82,12 @@ const TitleSection = ({
             color: inherit;
           }
           h3 {
+            font-size: 3.2rem;
+            font-weight: 600;
+            line-height: 4rem;
+            color: inherit;
+          }
+          h4 {
             font-size: 1.6rem;
           }
         }
