@@ -23,7 +23,6 @@ const Section = forwardRef(
             padding-left: var(--mobile-padding);
             padding-top: ${top};
             padding-bottom: ${bottom};
-            background-color: var(--white);
           }
           @media screen and (min-width: ${BREAKPOINTS.tab}) {
             section {

@@ -5,10 +5,20 @@ import Image from 'next/image';
 import { HiMenu, HiX } from 'react-icons/hi';
 // utils
 import { BREAKPOINTS } from 'utils/breakpoints';
+//hook
+import useDarkMode from 'hooks/useDarkMode';
+
+const isMobile = () => {
+  if (typeof window !== 'undefined') {
+    return window.innerWidth < 600;
+  }
+};
 
 const Navbar = () => {
   const [visible, setVisible] = useState(false);
   const [active, setActive] = useState(false);
+
+  const [enabled, setEnabled] = useDarkMode()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,6 +35,7 @@ const Navbar = () => {
 
   const handleClick = () => setActive(!active);
 
+  //fb, ig , whatsapp
   return (
     <>
       <nav
@@ -48,12 +59,52 @@ const Navbar = () => {
             </Link>
           </section>
 
-          <section
-            className={`toggle ${active ? 'active' : ''}`}
-            onClick={handleClick}
-          >
-            {active ? <HiX size="4rem" /> : <HiMenu size="4rem" />}
-          </section>
+          {isMobile() ? (
+            <section
+              className={`toggle ${active ? 'active' : ''}`}
+              onClick={handleClick}
+            >
+              {active ? <HiX size="4rem" /> : <HiMenu size="4rem" />}
+            </section>
+          ) : (
+            <section className="navigation">
+              <Link href="/">
+                <a>
+                  Inicio
+                  <div></div>
+                </a>
+              </Link>
+
+              <Link href="/competencias">
+                <a>
+                  Nosotros
+                  <div></div>
+                </a>
+              </Link>
+
+              <Link href="/competencias">
+                <a>
+                  Novedades
+                  <div></div>
+                </a>
+              </Link>
+
+              <Link href="/aprender">
+                <a>
+                  Ejemplares
+                  <div></div>
+                </a>
+              </Link>
+
+              <Link href="/contacto">
+                <a>
+                  Contacto
+                  
+                  <div></div>
+                </a>
+              </Link>
+            </section>
+          )}
         </div>
 
         <div className={`menu ${active ? 'active' : ''}`}>
@@ -106,7 +157,7 @@ const Navbar = () => {
           width: 100vw;
           padding: 0 var(--mobile-padding);
           color: var(--white);
-          background-color: var(--black);
+          background: rgb(32, 32, 32);
           z-index: 50;
         }
         nav > .nav-layout {
@@ -127,10 +178,19 @@ const Navbar = () => {
         }
 
         nav.transparent {
-          background: none;
+          background: linear-gradient(
+            180deg,
+            rgba(32, 32, 32, 0.8998949921765581) 0%,
+            rgba(32, 32, 32, 0) 100%
+          );
         }
         nav.background {
-          background-color: rgba(0, 0, 0, 0.9);
+          background: linear-gradient(
+            180deg,
+            rgba(32, 32, 32, 1) 0%,
+            rgba(32, 32, 32, 0.7990546560421043) 100%
+          );
+          backdrop-filter: blur(4px);
         }
 
         .menu {
@@ -142,7 +202,7 @@ const Navbar = () => {
             width: 4rem;
             height: 4rem;
             cursor: pointer;
-          }          
+          }
 
           /* Menu */
           .menu {
@@ -176,8 +236,6 @@ const Navbar = () => {
           .menu ul li a:hover {
             color: var(--red);
           }
-
-  
         }
 
         @media screen and (min-width: ${BREAKPOINTS.tab}) {
@@ -186,6 +244,36 @@ const Navbar = () => {
           }
           nav.active {
             padding: 0 2rem;
+          }
+
+          .navigation {
+            display: flex;
+            align-items: center;
+          }
+          .navigation a {
+            padding: 0.8rem 1.6rem;
+            font-weight: 500;
+            font-size: 1.6rem;
+            border-radius: var(--normal-radius);
+            cursor: pointer;
+            color: var(--white);
+          }
+          .navigation a div {
+            margin: 3px 2px 0;
+            height: 2.5px;
+            width: 0;
+            opacity: 0;
+            border-radius: 1000px;
+            background-color: var(--white);
+            transition: all 0.25s linear;
+          }
+          .navigation > a:hover > div {
+            width: calc(100% - 4px);
+            opacity: 1;
+          }
+
+          .navigation > a.primary {
+            border: 1px solid var(--white);
           }
         }
       `}</style>

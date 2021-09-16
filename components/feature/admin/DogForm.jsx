@@ -1,7 +1,5 @@
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 // components
-import Textarea from '@shared/posts/TextareaPosts';
 import Input from '@shared/inputs/Input';
 import Checkbox from '@shared/inputs/Checkbox';
 import Button from '@shared/Button';
@@ -12,10 +10,19 @@ import { BREAKPOINTS } from 'utils/breakpoints';
 // hooks
 import useDogs from 'hooks/useDogs';
 import useUploadFile from 'hooks/useUploadFile';
+import RadioButtons from '@shared/RadioButton';
+import DropImage from '@shared/DropImage';
+
+const genderOptions = [
+  { id: 1, name: 'Macho', value: 'male' },
+  { id: 2, name: 'Hembra', value: 'female' },
+];
+
+//selecion fecha buena
+//
 
 const ComposeDog = ({ closeModal }) => {
-  const { imgUrl, upload, deleteImg } = useUploadFile();
-
+  const { filesUrl, upload, deleteFile } = useUploadFile();
   const { createDog, loading, error } = useDogs();
   const {
     handleSubmit,
@@ -24,7 +31,7 @@ const ComposeDog = ({ closeModal }) => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    await createDog(data);
+    await createDog({ ...data, picture: filesUrl });
     if (!error.create) closeModal();
   };
 
@@ -49,10 +56,10 @@ const ComposeDog = ({ closeModal }) => {
           })}
         />
 
-        <Input
+        <RadioButtons
           label="Genero"
           name="gender"
-          placeholder="Hembra"
+          options={genderOptions}
           disabled={loading.create}
           errorMessage={errors.gender}
           ref={register('gender', {
@@ -83,6 +90,14 @@ const ComposeDog = ({ closeModal }) => {
           name="isPuppy"
           disabled={loading.create}
           ref={register('isPuppy')}
+        />
+
+        <DropImage
+          label="Imagenes"
+          name="picture"
+          files={filesUrl}
+          onChange={upload}
+          deleteFile={deleteFile}
         />
 
         <Separator />
@@ -156,21 +171,22 @@ const ComposeDog = ({ closeModal }) => {
 
         <Checkbox
           label="Placa de codo"
-          name="elbowPlate"
+          name="elbow"
           disabled={loading.create}
-          ref={register('elbowPlate')}
+          ref={register('elbow')}
         />
         <Checkbox
           label="Placa de cadera"
-          name="hipPlate"
+          name="hip"
           disabled={loading.create}
-          ref={register('hipPlate')}
+          ref={register('hip')}
         />
 
         <Input
           label="Url de PedigreeDB"
+          type="url"
           name="pedigreeUrl"
-          placeholder="http://www.pedigreedatabase.com/"
+          placeholder="pedigreedatabase.com/"
           disabled={loading.create}
           errorMessage={errors.pedigreeUrl}
           ref={register('pedigreeUrl')}

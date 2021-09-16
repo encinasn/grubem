@@ -21,10 +21,12 @@ const PostsList = ({ preloadPosts }) => {
       </ul>
 
       <style jsx>{`
+          ul {
+            background-color: var(--background-low);
+          }
         @media screen and (min-width: ${BREAKPOINTS.tab}) {
           ul {
             padding: 2rem 12%;
-            background-color: var(--grey-100);
           }
         }
         @media screen and (min-width: ${BREAKPOINTS.desktop}) {
@@ -32,7 +34,6 @@ const PostsList = ({ preloadPosts }) => {
             display: flex;
             align-items: center;
             flex-direction: column;
-            background-color: var(--grey-100);
           }
         }
       `}</style>

@@ -1,35 +1,23 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 // services
-import { uploadImage } from 'firebase/client';
+import { uploadFiles } from 'firebase/client';
 
 const useUploadFile = () => {
-  const [task, setTask] = useState(null);
-  const [imgUrl, setImgUrl] = useState(null);
+  const [filesUrl, setFilesUrl] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    if (task) {
-      const onProgress = () => {};
-      const onError = () => {};
-      const onComplete = () => {
-        console.log('Complete');
-        task.snapshot.ref.getDownloadURL().then(setImgUrl);
-        setLoading(false);
-      };
-
-      task.on('state_changed', onProgress, onError, onComplete);
-    }
-  }, [task]);
-
-  const upload = (file, folder) => {
-    const task = uploadImage(file, folder);
-    setTask(task);
+  const upload = async (folder, files) => {
     setLoading(true);
+    const links = await uploadFiles(folder, files)
+    setFilesUrl(links)
+    setLoading(false);
   };
 
-  const deleteImg = () => setImgUrl(null);
+  const deleteFile = (payload) => {
+    setFilesUrl(filesUrl.filter((file) => file !== payload));
+  };
 
-  return { imgUrl, loading, upload, deleteImg };
+  return { filesUrl, loading, upload, deleteFile };
 };
 
 export default useUploadFile;

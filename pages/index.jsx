@@ -16,7 +16,7 @@ const HomePage = ({ posts, dogs }) => {
     <>
       <Layout>
         <Head>
-          <title>Criadero Grubem</title>
+          <title>Ovejeros Grubem</title>
         </Head>
         <LandingVideo />
 

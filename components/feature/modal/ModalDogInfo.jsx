@@ -18,7 +18,7 @@ const ModalWrapper = ({
     <>
       <div className="modal__wrapper">
         <div className="modal__background" onClick={closeModal} />
-        <div className="modal__content">
+        <div className="modal__content scroll_modal">
           <div className="modal__relative">
             <header>
               <div className="modal__close" onClick={closeModal}>
@@ -77,7 +77,7 @@ const ModalWrapper = ({
           height: 100%;
           padding-bottom: 0;
           z-index: 200;
-          background-color: var(--white);
+          background: var(--background);
           border-radius: 16px 16px 0 0;
           overflow-y: auto;
           -webkit-overflow-scrolling: touch;

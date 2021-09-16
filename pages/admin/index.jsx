@@ -1,15 +1,19 @@
 import { useState } from 'react';
 import Link from 'next/link';
+import Head from 'next/head';
 // components
-import ComposePost from '@shared/posts/ComposePost';
+import ComposePost from '@feature/admin/ComposePost';
 import DogForm from '@feature/admin/DogForm';
 import Section from '@shared/Section';
 import Modal from '@feature/modal/Modal';
 // hooks
 import useUser from 'hooks/useUser';
+import useDarkMode from 'hooks/useDarkMode';
 
 const AdminPage = () => {
   const { user } = useUser();
+
+  const [enabled, setEnabled] = useDarkMode()
 
   const [newPost, setNewPost] = useState(false);
   const openModalPost = () => setNewPost(true);
@@ -23,6 +27,10 @@ const AdminPage = () => {
 
   return (
     <>
+      <Head>
+        <title>Administrador | Ovejeros Grubem</title>
+      </Head>
+
       <Section top="7.2rem">
         <h1>{user.email}</h1>
         <button onClick={openModalPost}>Nueva publicacion</button>

@@ -12,13 +12,13 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <meta name="application-name" content="Criadero GRubEm" />
+          <meta name="application-name" content="Ovejeros Grubem" />
           <meta name="apple-mobile-web-app-capable" content="yes" />
           <meta
             name="apple-mobile-web-app-status-bar-style"
             content="default"
           />
-          <meta name="apple-mobile-web-app-title" content="Criadero GRubEm" />
+          <meta name="apple-mobile-web-app-title" content="Ovejeros Grubem" />
           <meta
             name="description"
             content="Criadero de ovejeros alemanes"
@@ -65,7 +65,7 @@ class MyDocument extends Document {
 
           <meta name="twitter:card" content="summary" />
           <meta name="twitter:url" content="https://criaderogrubem.com/" />
-          <meta name="twitter:title" content="Criadero GRubEm" />
+          <meta name="twitter:title" content="Ovejeros Grubem" />
           <meta
             name="twitter:description"
             content="Ovejeros Alemanes"
@@ -76,12 +76,12 @@ class MyDocument extends Document {
           />
           <meta name="twitter:creator" content="@CriaderoGRubEm" />
           <meta property="og:type" content="website" />
-          <meta property="og:title" content="Criadero GRubEm" />
+          <meta property="og:title" content="Ovejeros Grubem" />
           <meta
             property="og:description"
-            content="Criadero GRubEm la app para gestionar tu negocio"
+            content="Ovejeros Grubem la app para gestionar tu negocio"
           />
-          <meta property="og:site_name" content="Criadero GRubEm" />
+          <meta property="og:site_name" content="Ovejeros Grubem" />
           <meta property="og:url" content="https://criaderogrubem.com//" />
           <meta
             property="og:image"

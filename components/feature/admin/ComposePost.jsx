@@ -14,13 +14,13 @@ import useUploadFile from 'hooks/useUploadFile';
 const ComposePost = ({ closeModal }) => {
   const [content, setContent] = useState('');
 
-  const { imgUrl, upload, deleteImg } = useUploadFile();
+  const { filesUrl, upload, deleteFile } = useUploadFile();
 
   const { createPost, loading, error } = usePosts();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await createPost({ description: content, picture: imgUrl });
+    await createPost({ description: content, picture: filesUrl });
     if (!error.create) closeModal();
   };
 
@@ -46,7 +46,9 @@ const ComposePost = ({ closeModal }) => {
           disabled={loading.create}
         />
 
-        {imgUrl && <PostImage imgUrl={imgUrl} onChange={deleteImg} />}
+        {filesUrl.length > 0 && filesUrl.map((img) => (
+          <PostImage imgUrl={img} onChange={deleteFile} key={img} />
+        ))}
 
         <section className="add-to-post">
           <span>Añadir a la publicación</span>

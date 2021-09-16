@@ -4,7 +4,7 @@ import DogImage from './DogImage';
 // utils
 import { BREAKPOINTS } from 'utils/breakpoints';
 
-const ImageCarrousel = ({ data = [1], name }) => {
+const ImageCarrousel = ({ data = ['/images/photos/placeholder.png'], name }) => {
 
   return (
     <>

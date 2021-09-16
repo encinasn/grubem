@@ -69,6 +69,7 @@ const CarrouselDogs = ({ data, type }) => {
           {data.map((dog) => (
             <DogCard
               key={dog.id}
+              picture={dog.picture}
               name={dog.name}
               dateOfBirth={dog.dateOfBirth}
               gender={dog.gender}
@@ -85,7 +86,6 @@ const CarrouselDogs = ({ data, type }) => {
       <style jsx global>{`
         .carrousel_wrapper {
           width: 100%;
-          background-color: var(--white);
           padding: 0;
         }
         .rec.rec-slider-container {
@@ -95,7 +95,7 @@ const CarrouselDogs = ({ data, type }) => {
         .rec.rec-arrow {
           border-radius: 0;
           border: none;
-          background-color: var(--white);
+          background: none;
           box-shadow: none;
           margin: 0 2rem;
         }
