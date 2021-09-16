@@ -22,14 +22,14 @@ const HomePage = ({ posts, dogs }) => {
 
         <CarrouselSection preloadDogs={dogs} />
 
-        <Section top="3rem" bottom="1rem">
+        {/* <Section top="3rem" bottom="1rem">
           <Separator />
           <TitleSection variant="h2" section="criadero">
             Ultimas publicaciones
           </TitleSection>
         </Section>
 
-        <PostsList preloadPosts={posts} />
+        <PostsList preloadPosts={posts} /> */}
       </Layout>
     </>
   );
