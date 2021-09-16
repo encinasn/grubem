@@ -2,19 +2,8 @@
 import { FaImages } from 'react-icons/fa';
 
 const FileIcon = ({ name, disabled, onChange }) => {
-  // const imageHandler = (e) => {
-  //   const reader = new FileReader();
-  //   reader.onload = () => {
-  //     if (reader.readyState === 2) {
-  //       //onChange(reader.result);
-  //       onChange(e.target.files[0])
-  //     }
-  //   };
-  //   reader.readAsDataURL(e.target.files[0]);
-  // };
-
   const imageHandler = (e) => {
-    onChange(e.target.files[0], 'posts');
+    onChange('posts', e.target.files );
   };
 
   return (
@@ -22,6 +11,7 @@ const FileIcon = ({ name, disabled, onChange }) => {
       <input
         type="file"
         accept="image/*"
+        multiple
         name={name}
         disabled={disabled}
         onChange={imageHandler}

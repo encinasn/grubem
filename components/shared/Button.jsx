@@ -31,7 +31,6 @@ const ButtonDefault = ({
           margin: ${margin};
           width: ${width};
           font-weight: 600;
-          color: var(--black-color);
           text-decoration: none;
           border: 1.8px solid transparent;
           border-radius: var(--normal-radius);

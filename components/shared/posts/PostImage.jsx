@@ -3,7 +3,7 @@ import { FaTimes } from 'react-icons/fa';
 
 const PostImage = ({ imgUrl, onChange }) => {
   const handleClick = (e) => {
-    onChange(null);
+    onChange(imgUrl);
   };
   return (
     <>

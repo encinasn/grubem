@@ -89,7 +89,7 @@ const InputLogin = forwardRef(
             width: ${width};
             padding-left: ${icon ? '40px' : '10px'};
             padding-right: 40px;
-            background: none;
+            background: var(--background);
             border-radius: var(--normal-radius);
             border: 3px solid transparent;
             transition: 0.3s ease all;
@@ -100,7 +100,7 @@ const InputLogin = forwardRef(
                 : 'var(--border);'};
           }
           input:focus {
-            background: var(--white);
+            background: var(--background);
             border: 2px solid var(--black);
             outline: none;
             box-shadow: 0 0 0 0.1875em
@@ -108,6 +108,7 @@ const InputLogin = forwardRef(
                 ? 'rgb(255, 209, 0, 0.0)'
                 : 'var(--grey-100)'};
           }
+
           input[disabled] {
             background-color: var(--grey-300);
             border: 2px solid var(--grey-300);

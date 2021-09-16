@@ -16,7 +16,7 @@ const Footer = () => {
           right: 0;
           width: 100vw;
           padding: 2rem 0;
-          background-color: var(--white);
+          background-color: var(--background);
           z-index: 2;
         }
 

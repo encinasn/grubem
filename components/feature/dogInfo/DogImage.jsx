@@ -3,11 +3,11 @@ import { memo } from 'react';
 // utils
 import { BREAKPOINTS } from 'utils/breakpoints';
 
-const DogImage = ({ picture = '/images/photos/landing.jpg', name }) => {
+const DogImage = ({ url, name }) => {
   return (
     <>
       <li className="picture">
-        <img src={picture} alt={`Fotografia de ${name}`} />
+        <img src={url} alt={`Fotografia de ${name}`} />
       </li>
 
       <style jsx>{`

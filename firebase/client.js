@@ -113,3 +113,22 @@ export const uploadImage = (file, folder) => {
   const storageRef = firebase.storage().ref().child(`${folder}/${file.name}`);
   return storageRef.put(file);
 };
+
+export const uploadFiles = (folder, files) => {
+  let tasks = [];
+  
+  for (let file of files) {
+    const task = firebase
+      .storage()
+      .ref()
+      .child(`${folder}/${file.name}`)
+      .put(file)
+      .then((snap) => snap.ref.getDownloadURL());
+
+    tasks.push(task);
+  }
+
+  return Promise.all(tasks).then((links) => {
+    return links;
+  });
+};

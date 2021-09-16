@@ -16,8 +16,8 @@ const DogInfo = ({ data }) => {
     selection,
     femaleParent,
     maleParent,
-    elbowPlate,
-    hipPlate,
+    elbow,
+    hip,
     pedigreeUrl = '',
   } = data;
   
@@ -48,10 +48,10 @@ const DogInfo = ({ data }) => {
         </ItemDetail>
 
         <ItemDetail title="Placa de codo">
-          {elbowPlate ? 'Si' : 'No'}
+          {elbow ? 'Si' : 'No'}
         </ItemDetail>
         <ItemDetail title="Placa de cadera">
-          {hipPlate ? 'Si' : 'No'}
+          {hip ? 'Si' : 'No'}
         </ItemDetail>
 
         <ItemDetail title="Padre">{maleParent}</ItemDetail>

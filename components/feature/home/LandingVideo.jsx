@@ -69,7 +69,7 @@ const LandingVideo = () => {
         }
         .text h2,
         .text h4 {
-          color: #fff;
+          color: var(--white);
           text-transform: uppercase;
         }
         .text h2 {

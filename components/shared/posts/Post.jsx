@@ -33,7 +33,6 @@ const Post = ({ post = {} }) => {
         )}
 
         <section className="actions">
-          <button>Me gusta</button>
           <button>Compartir</button>
         </section>
       </li>
@@ -41,9 +40,14 @@ const Post = ({ post = {} }) => {
       <style jsx>{`
         li {
           width: 100%;
+          border-top: 1px solid var(--border);
           border-bottom: 1px solid var(--border);
+          margin-bottom: 2rem;
           max-width: 70rem;
-          background-color: var(--white);
+          background-color: var(--background);
+        }
+        li:first-child {
+          border-top: none;
         }
         .header {
           display: flex;
@@ -73,7 +77,7 @@ const Post = ({ post = {} }) => {
         .image {
           border-top: 1px solid var(--border);
           width: 100%;
-          height: auto;
+          margin-bottom: -6px;
         }
         .image > img {
           width: 100%;
@@ -83,8 +87,8 @@ const Post = ({ post = {} }) => {
         }
 
         .actions {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
+          /* display: grid;
+          grid-template-columns: 1fr 1fr; */
           border-top: 1px solid var(--border);
         }
         .actions > button {
@@ -96,16 +100,17 @@ const Post = ({ post = {} }) => {
           font-size: 1.2rem;
           cursor: pointer;
         }
-        .actions > button:first-child {
+        /* .actions > button:first-child {
           border-right: 1px solid var(--border);
-        }
+        } */
 
         @media screen and (min-width: ${BREAKPOINTS.tab}) {
           li {
             border-radius: var(--normal-radius);
             margin-bottom: 2rem;
             box-shadow: var(--normal-shadow);
-            background: var(--white);
+            border-top: none;
+            border-bottom: none;
           }
           .header > div {
             font-size: 1.6rem;
@@ -114,7 +119,7 @@ const Post = ({ post = {} }) => {
             font-size: 1.6rem;
           }
           .actions > button:hover {
-            background-color: var(--grey-100);
+            background-color: var(--background-low);
           }
         }
       `}</style>

@@ -5,12 +5,6 @@ import Footer from '@layout/footer/Footer';
 import { BREAKPOINTS } from 'utils/breakpoints';
 
 const Layout = ({ children }) => {
-  const isMobile = () => {
-    if (typeof window !== 'undefined') {
-      return window.innerWidth < 600;
-    }
-  };
-
   return (
     <>
       <Navbar />
@@ -24,7 +18,7 @@ const Layout = ({ children }) => {
           width: 100%;
           min-height: 100vh;
           align-items: center;
-          background-color: var(--white);
+          background: var(--background);
         }
 
         @media (min-width: ${BREAKPOINTS.tab}) {
