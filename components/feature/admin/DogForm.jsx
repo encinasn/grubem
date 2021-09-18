@@ -18,17 +18,24 @@ const genderOptions = [
   { id: 2, name: 'Hembra', value: 'female' },
 ];
 
-//selecion fecha buena
-//
+const selectionOptions = [
+  { id: 1, name: 'Seleccion I', value: 'Seleccion I' },
+  { id: 2, name: 'Seleccion I  - IGP1', value: 'Seleccion I  - IGP1' },
+  { id: 2, name: 'Seleccion II', value: 'Seleccion II ' },
+];
 
 const ComposeDog = ({ closeModal }) => {
-  const { filesUrl, upload, deleteFile } = useUploadFile();
+  const { filesUrl, loading: imgLoading, upload, deleteFile } = useUploadFile();
   const { createDog, loading, error } = useDogs();
   const {
     handleSubmit,
     register,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      last_name: 'Von der Grubem Land',
+    },
+  });
 
   const onSubmit = async (data) => {
     await createDog({ ...data, picture: filesUrl });
@@ -40,11 +47,29 @@ const ComposeDog = ({ closeModal }) => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <Input
           label="Nombre"
-          name="name"
+          name="first_name"
+          placeholder="Nombre"
+          disabled={loading.create}
+          errorMessage={errors.first_name}
+          ref={register('first_name', {
+            required: {
+              value: true,
+              message: newMessage.required,
+            },
+            pattern: {
+              value: newExpression.name,
+              message: newMessage.name,
+            },
+          })}
+        />
+
+        <Input
+          label="Apellido"
+          name="last_name"
           placeholder="Von der Grubem Land"
           disabled={loading.create}
-          errorMessage={errors.name}
-          ref={register('name', {
+          errorMessage={errors.last_name}
+          ref={register('last_name', {
             required: {
               value: true,
               message: newMessage.required,
@@ -86,10 +111,10 @@ const ComposeDog = ({ closeModal }) => {
         />
 
         <Checkbox
-          label="Es cachorro"
-          name="isPuppy"
+          label="Esta disponible"
+          name="available"
           disabled={loading.create}
-          ref={register('isPuppy')}
+          ref={register('available')}
         />
 
         <DropImage
@@ -98,14 +123,15 @@ const ComposeDog = ({ closeModal }) => {
           files={filesUrl}
           onChange={upload}
           deleteFile={deleteFile}
+          loading={imgLoading}
         />
 
         <Separator />
 
-        <Input
+        <RadioButtons
           label="Selección"
           name="selection"
-          placeholder="Von der Grubem Land"
+          options={selectionOptions}
           disabled={loading.create}
           errorMessage={errors.selection}
           ref={register('selection', {
@@ -113,12 +139,8 @@ const ComposeDog = ({ closeModal }) => {
               value: true,
               message: newMessage.required,
             },
-            pattern: {
-              value: newExpression.name,
-              message: newMessage.name,
-            },
           })}
-        />
+        />       
 
         {/* <DropdownSearch
           label="Categoria"
@@ -147,6 +169,10 @@ const ComposeDog = ({ closeModal }) => {
           disabled={loading.create}
           errorMessage={errors.femaleParent}
           ref={register('femaleParent', {
+            required: {
+              value: true,
+              message: newMessage.required,
+            },
             pattern: {
               value: newExpression.name,
               message: newMessage.name,
@@ -160,6 +186,10 @@ const ComposeDog = ({ closeModal }) => {
           disabled={loading.create}
           errorMessage={errors.maleParent}
           ref={register('maleParent', {
+            required: {
+              value: true,
+              message: newMessage.required,
+            },
             pattern: {
               value: newExpression.name,
               message: newMessage.name,

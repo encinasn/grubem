@@ -37,6 +37,20 @@ selector {
   --border: #dadce0;
   --border-black: #ebebeb5b;
 
+  --arrow-slider-color: var(--black);
+  --arrow-slider-left: linear-gradient(
+    270deg,
+    rgba(250, 250, 250, 0) 0%,
+    rgba(250, 250, 250, 0.5973739837731968) 40%,
+    rgba(250, 250, 250, 0.6) 100%
+  );
+  --arrow-slider-right: linear-gradient(
+    90deg,
+    rgba(250, 250, 250, 0) 0%,
+    rgba(250, 250, 250, 0.5973739837731968) 40%,
+    rgba(250, 250, 250, 0.6) 100%
+  );
+
   /* Colores de validacion */
   --info-color: rgb(54, 122, 211);
   --success-color: rgb(47, 201, 106);
@@ -72,7 +86,7 @@ selector {
 
   /* Layout */
   --mobile-padding: 2rem;
-  --desktop-padding: 10%;
+  --desktop-padding: 8%;
 
   scroll-behavior: smooth;
 }
@@ -113,6 +127,19 @@ body.dark {
   --red: #d44141;
   --border: #ebebeb2d;
   --border-black: #dadce0;
+  --arrow-slider-color: var(--white);
+  --arrow-slider-left: linear-gradient(
+    270deg,
+    rgba(32, 32, 32, 0) 0%,
+    rgba(32, 32, 32, 0.6) 40%,
+    rgba(32, 32, 32, 0.6) 100%
+  );
+  --arrow-slider-right: linear-gradient(
+    90deg,
+    rgba(32, 32, 32, 0) 0%,
+    rgba(32, 32, 32, 0.6) 40%,
+    rgba(32, 32, 32, 0.6) 100%
+  );
 }
 
 body,
@@ -179,7 +206,7 @@ input[type='number']::-webkit-outer-spin-button {
 
 ::selection {
   color: var(--white);
-  background: var(--red);
+  background: #d44141f1;
 }
 
 /* ================== UI KIT ================== */

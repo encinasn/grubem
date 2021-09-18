@@ -4,6 +4,7 @@ import { useDropzone } from 'react-dropzone';
 import { HiX } from 'react-icons/hi';
 // components
 import Label from '@shared/inputs/Label';
+import Loading from './Loading';
 
 const DropImage = ({
   name,
@@ -13,6 +14,7 @@ const DropImage = ({
   files = [],
   onChange,
   deleteFile,
+  loading
 }) => {
   const onDrop = useCallback((acceptedFiles) => {
     onChange('dogs', acceptedFiles);
@@ -25,12 +27,14 @@ const DropImage = ({
     <>
       <Label label={label} name={name} optional={optional} />
 
-      {!files.length && (
+      {!files.length && !loading && (
         <div className="wrapper" {...getRootProps()}>
           <input {...getInputProps()} />
           <p>Arrastra y suelta el archivo, o haz click para seleccionarlo</p>
         </div>
       )}
+
+      {loading && <Loading/>}
 
       <div className="thumb_wrapper">
         {files.map((file) => (

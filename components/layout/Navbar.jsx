@@ -18,7 +18,7 @@ const Navbar = () => {
   const [visible, setVisible] = useState(false);
   const [active, setActive] = useState(false);
 
-  const [enabled, setEnabled] = useDarkMode()
+  const [enabled, setEnabled] = useDarkMode();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,6 +31,24 @@ const Navbar = () => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
+  }, []);
+
+  useEffect(() => {
+    console.log('hola')
+    if (typeof window !== 'undefined') {
+      const hashId = window.location.hash;
+
+      if (hashId) {
+        const element = document.getElementById(hashId.replace('#', ''));
+        if (element) {
+          element.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start',
+            inline: 'nearest',
+          });
+        }
+      }
+    }
   }, []);
 
   const handleClick = () => setActive(!active);
@@ -75,31 +93,30 @@ const Navbar = () => {
                 </a>
               </Link>
 
-              <Link href="/competencias">
+              <Link href="/#nosotros">
                 <a>
                   Nosotros
                   <div></div>
                 </a>
               </Link>
 
-              <Link href="/competencias">
+              <Link href="/#novedades">
                 <a>
                   Novedades
                   <div></div>
                 </a>
               </Link>
 
-              <Link href="/aprender">
+              <Link href="/#ejemplares">
                 <a>
                   Ejemplares
                   <div></div>
                 </a>
               </Link>
 
-              <Link href="/contacto">
+              <Link href="/#contacto">
                 <a>
                   Contacto
-                  
                   <div></div>
                 </a>
               </Link>

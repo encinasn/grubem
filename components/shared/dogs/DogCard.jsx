@@ -8,27 +8,28 @@ import useTimeAgo from 'hooks/useTimeAgo';
 const no_op = () => {};
 
 const DogCard = ({
-  picture = '/images/photos/landing.jpg',
-  name = 'Von der Grubem Land',
+  picture = '/images/photos/placeholder.png',
+  first_name = 'Von der Grubem Land',
   dateOfBirth = 1630163183,
   gender = 'male',
+  available,
   onClick = no_op,
 }) => {
-
-  const dogGender = gender === 'female' ? 'Hembra' : 'Macho'
+  const dogGender = gender === 'female' ? 'Hembra' : 'Macho';
 
   const timeago = useTimeAgo(dateOfBirth);
-  const age = timeago.replace('hace', '')
+  const age = timeago.replace('hace', '');
 
   return (
     <>
       <li onClick={onClick}>
         <div className="picture">
-          <img src={picture} alt={`Fotografia de ${name}`} />
+          {available && <div>Disponible</div>}
+          <img src={picture} alt={`Fotografia de ${first_name}`} loading="lazy" />
         </div>
 
         <div className="info">
-          <h3>{name}</h3>
+          <h3>{first_name}</h3>
           <p>{`${dogGender} • ${age}`}</p>
         </div>
       </li>
@@ -43,11 +44,25 @@ const DogCard = ({
         }
 
         .picture {
+          position: relative;
           width: 26rem;
           height: max-content;
           aspect-ratio: 4 / 3;
           overflow: hidden;
           border-radius: 4px;
+        }
+        .picture > div {
+          position: absolute;
+          top: 8px;
+          right: 8px;
+          text-transform: uppercase;
+          color: var(--white);
+          font-size: 1.2rem;
+          padding: 0.4rem 0.8rem;
+          border-radius: var(--normal-radius);
+          background-color: var(--red);
+          opacity: 0.9;
+          z-index: 8;
         }
         .picture > img {
           width: 100%;
@@ -75,7 +90,7 @@ const DogCard = ({
             cursor: pointer;
           }
           .picture {
-            width: 36rem;
+            width: 100%;
           }
         }
       `}</style>

@@ -6,12 +6,14 @@ import { IoMdFemale, IoMdMale } from 'react-icons/io';
 import useTimeAgo from 'hooks/useTimeAgo';
 import ButtonExternalLink from '@shared/ButtonExternalLink';
 import ItemDetail from './ItemDetail';
+import HeadDogs from '@shared/HeadDogs';
 
 const DogInfo = ({ data }) => {
   const {
-    picture,
+    picture = [],
     gender,
-    name,
+    first_name,
+    last_name,
     dateOfBirth = 1630163183,
     selection,
     femaleParent,
@@ -20,17 +22,19 @@ const DogInfo = ({ data }) => {
     hip,
     pedigreeUrl = '',
   } = data;
-  
+
   const timeago = useTimeAgo(dateOfBirth);
   const age = timeago.replace('hace', '');
 
   return (
     <>
-      <ImageCarrousel data={picture} name={name} />
+      <HeadDogs name={`${first_name} ${last_name}`} image={picture[0]} />
+
+      <ImageCarrousel data={picture} name={`${first_name} ${last_name}`} />
       <section>
         <div className="name-gender">
           <TitleSection variant="h3" separator={false} margin="0">
-            {name}
+            {first_name}
           </TitleSection>
           {gender === 'female' ? (
             <IoMdFemale size="2.4rem" color="var(--grey-700)" />
@@ -40,22 +44,20 @@ const DogInfo = ({ data }) => {
         </div>
 
         <TitleSection variant="h3" separator={false} margin="0">
-          {selection}
+          {last_name}
         </TitleSection>
 
-        <ItemDetail title="Edad" first>
-          {age}
+        <ItemDetail title="Selección" first>
+          {selection}
         </ItemDetail>
 
-        <ItemDetail title="Placa de codo">
-          {elbow ? 'Si' : 'No'}
-        </ItemDetail>
-        <ItemDetail title="Placa de cadera">
-          {hip ? 'Si' : 'No'}
-        </ItemDetail>
+        <ItemDetail title="Edad">{age}</ItemDetail>
 
         <ItemDetail title="Padre">{maleParent}</ItemDetail>
         <ItemDetail title="Madre">{femaleParent}</ItemDetail>
+
+        <ItemDetail title="Placa de codo">{elbow && 'Si'}</ItemDetail>
+        <ItemDetail title="Placa de cadera">{hip && 'Si'}</ItemDetail>
 
         <ButtonExternalLink
           path={pedigreeUrl}
