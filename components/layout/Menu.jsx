@@ -13,22 +13,22 @@ const Menu = () => {
             </Link>
           </li>
           <li>
-            <Link href="/competencias">
+            <Link href="/nosostros">
               <a>Nosotros</a>
             </Link>
           </li>
           <li>
-            <Link href="/competencias">
+            <Link href="/">
               <a>Novedades</a>
             </Link>
           </li>
           <li>
-            <Link href="/aprender">
+            <Link href="/">
               <a>Ejemplares</a>
             </Link>
           </li>
           <li>
-            <Link href="/contacto">
+            <Link href="/">
               <a>Contacto</a>
             </Link>
           </li>

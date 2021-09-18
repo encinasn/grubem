@@ -21,7 +21,7 @@ class MyDocument extends Document {
           <meta name="apple-mobile-web-app-title" content="Ovejeros Grubem" />
           <meta
             name="description"
-            content="Criadero de ovejeros alemanes"
+            content="Criadero de Ovejeros Alemanes"
           />
           <meta name="format-detection" content="telephone=no" />
           <meta name="mobile-web-app-capable" content="yes" />
@@ -58,10 +58,6 @@ class MyDocument extends Document {
             color="#202020"
           />
           <link rel="shortcut icon" href="/favicon.ico" />
-          <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"
-          />
 
           <meta name="twitter:card" content="summary" />
           <meta name="twitter:url" content="https://criaderogrubem.com/" />
@@ -72,20 +68,20 @@ class MyDocument extends Document {
           />
           <meta
             name="twitter:image"
-            content="https://criaderogrubem.com//icons/android-chrome-192x192.png"
+            content="https://criaderogrubem.com//images/brand/logo.png"
           />
           <meta name="twitter:creator" content="@CriaderoGRubEm" />
           <meta property="og:type" content="website" />
           <meta property="og:title" content="Ovejeros Grubem" />
           <meta
             property="og:description"
-            content="Ovejeros Grubem la app para gestionar tu negocio"
+            content="Criadero de Ovejeros Alemanes"
           />
           <meta property="og:site_name" content="Ovejeros Grubem" />
           <meta property="og:url" content="https://criaderogrubem.com//" />
           <meta
             property="og:image"
-            content="https://criaderogrubem.com//icons/icon-512x512.png"
+            content="https://criaderogrubem.com//images/brand/logo.png"
           />
 
           {/*  apple splash screen images

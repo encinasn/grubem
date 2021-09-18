@@ -2,17 +2,23 @@ import { forwardRef } from 'react';
 import { BREAKPOINTS } from 'utils/breakpoints';
 
 const Section = forwardRef(
-  ({
-    children,
-    width = '100%',
-    height = 'max-content',
-    margin,
-    top,
-    bottom,
-  }, ref) => {
+  (
+    {
+      id,
+      children,
+      width = '100%',
+      height = 'max-content',
+      margin,
+      top,
+      bottom,
+    },
+    ref
+  ) => {
     return (
       <>
-        <section ref={ref}>{children}</section>
+        <section ref={ref} id={id}>
+          {children}
+        </section>
         <style jsx>{`
           section {
             position: relative;

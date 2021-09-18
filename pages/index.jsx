@@ -11,6 +11,11 @@ import CarrouselSection from '@feature/home/CarrouselSection';
 // services
 import { getDogs, getPosts } from 'firebase/client';
 
+// Seleccion I 
+// Seleccion I  - IGP1
+// Seleccion II  
+
+//12 meses
 const HomePage = ({ posts, dogs }) => {
   return (
     <>

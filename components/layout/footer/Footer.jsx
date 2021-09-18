@@ -35,7 +35,7 @@ const Footer = () => {
 
         @media screen and (min-width: ${BREAKPOINTS.tab}) {
           footer {
-            padding: 0 10%;
+            padding: 0 var(--desktop-padding);
             padding-bottom: 2rem;
           }
           div {

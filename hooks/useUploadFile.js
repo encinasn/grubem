@@ -8,8 +8,8 @@ const useUploadFile = () => {
 
   const upload = async (folder, files) => {
     setLoading(true);
-    const links = await uploadFiles(folder, files)
-    setFilesUrl(links)
+    const links = await uploadFiles(folder, files);
+    setFilesUrl(links);
     setLoading(false);
   };
 

@@ -2,6 +2,8 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
 import 'firebase/storage';
+//
+import Compressor from 'compressorjs';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBMlO4RABeOen3oRmzBYISOJArCrmpRK_c',
@@ -80,9 +82,19 @@ export const addDog = (data) => {
 };
 
 const normalizeDogs = (dogs) => {
-  const female = dogs.filter((dog) => dog.gender === 'female' && !dog.isPuppy);
-  const male = dogs.filter((dog) => dog.gender === 'male' && !dog.isPuppy);
-  const puppy = dogs.filter((dog) => dog.isPuppy === true);
+  const isPuppy = (timestamp) => {
+    const now = Date.now();
+    const elapsed = (now - timestamp) / 1000;
+    return elapsed < 31556900;
+  };
+
+  const female = dogs.filter(
+    (dog) => dog.gender === 'female' && !isPuppy(dog.dateOfBirth)
+  );
+  const male = dogs.filter(
+    (dog) => dog.gender === 'male' && !isPuppy(dog.dateOfBirth)
+  );
+  const puppy = dogs.filter((dog) => isPuppy(dog.dateOfBirth));
 
   return { female, male, puppy };
 };
@@ -114,21 +126,45 @@ export const uploadImage = (file, folder) => {
   return storageRef.put(file);
 };
 
-export const uploadFiles = (folder, files) => {
+export const uploadFiles = async (folder, files) => {
   let tasks = [];
-  
-  for (let file of files) {
-    const task = firebase
-      .storage()
-      .ref()
-      .child(`${folder}/${file.name}`)
-      .put(file)
-      .then((snap) => snap.ref.getDownloadURL());
 
-    tasks.push(task);
-  }
+  return compressFiles(files)
+    .then((compressedFiles) => {
+      for (let file of compressedFiles) {
+        const task = firebase
+          .storage()
+          .ref()
+          .child(`${folder}/${file.name}`)
+          .put(file)
+          .then((snap) => snap.ref.getDownloadURL())
+          .catch((err) => console.log(err));
 
-  return Promise.all(tasks).then((links) => {
-    return links;
+        tasks.push(task);
+      }
+    })
+    .then(() => Promise.all(tasks).then((links) => links));
+};
+
+const compressFiles = async (files) => {
+  return new Promise((resolve, reject) => {
+    let compressedFiles = [];
+
+    for (let file of files) {
+      new Compressor(file, {
+        quality: 0.6,
+        width: 1280,
+        success(result) {
+          //console.dir({ original: file.size, comprimido: result.size });
+          compressedFiles.push(result);
+        },
+      });
+    }
+
+    const time = files.length > 2 ? 500 * files.length : 1000;
+
+    setTimeout(() => {
+      resolve(compressedFiles);
+    }, time);
   });
 };
