@@ -4,7 +4,7 @@ const HeadDogs = ({ name, image }) => {
   return (
     <Head>
       <title>Ejemplar {name}</title>
-      
+
       {/* Open Graph para Facebook*/}
       <meta property="og:title" content={name} />
       <meta property="og:type" content="product" />
@@ -28,10 +28,10 @@ const HeadDogs = ({ name, image }) => {
       <meta name="twitter:label2" content="Color" />
 
       {/*Schema.org para Google+ */}
-      <meta itemprop="name" content="Nombre de la página web" />
-      <meta itemprop="description" content="Descripción de la página" />
+      <meta itemProp="name" content="Nombre de la página web" />
+      <meta itemProp="description" content="Descripción de la página" />
       <meta
-        itemprop="image"
+        itemProp="image"
         content="http://www.midominio.com/imagen.jpg"
       ></meta>
     </Head>
