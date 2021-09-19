@@ -1,11 +1,19 @@
 import Head from 'next/head';
 
-const HeadDogs = ({ name, image, description }) => {
+const HeadDogs = ({
+  name = 'Ejemplar',
+  image = '/images/photos/landing.jpg',
+  description = 'Descripcion hola',
+}) => {
   return (
     <Head>
       <title>{name}</title>
 
-      <html prefix="http://ogp.me/ns#" itemcope itemType="http://schema.org/Product" />
+      <html
+        prefix="http://ogp.me/ns#"
+        itemcope
+        itemType="http://schema.org/Product"
+      />
 
       {/* Open Graph para Facebook*/}
       <meta property="og:title" content={name} />
