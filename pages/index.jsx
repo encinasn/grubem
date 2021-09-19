@@ -11,17 +11,14 @@ import CarrouselSection from '@feature/home/CarrouselSection';
 // services
 import { getDogs, getPosts } from 'firebase/client';
 
-// Seleccion I 
-// Seleccion I  - IGP1
-// Seleccion II  
-
-//12 meses
 const HomePage = ({ posts, dogs }) => {
   return (
     <>
       <Layout>
         <Head>
-          <title>Ovejeros Grubem</title>
+          <title>Ovejeros Alemanes - Von der Grubem Land</title>
+          <meta name="description" content="Criadero de perros ovejeros alemanes..." />
+          <meta name="keywords" content="perros, ovejeros, ovejeros alemanes" />
         </Head>
         <LandingVideo />
 

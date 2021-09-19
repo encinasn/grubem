@@ -6,7 +6,7 @@ import { IoMdFemale, IoMdMale } from 'react-icons/io';
 import useTimeAgo from 'hooks/useTimeAgo';
 import ButtonExternalLink from '@shared/ButtonExternalLink';
 import ItemDetail from './ItemDetail';
-import HeadDogs from '@shared/HeadDogs';
+import MetaData from '@shared/MetaDataDog';
 
 const DogInfo = ({ data }) => {
   const {
@@ -26,9 +26,17 @@ const DogInfo = ({ data }) => {
   const timeago = useTimeAgo(dateOfBirth);
   const age = timeago.replace('hace', '');
 
+  const description = `Ejemplar ${
+    gender === 'female' ? 'hembra' : 'macho'
+  } de  ${age} con ${selection}`;
+
   return (
     <>
-      <HeadDogs name={`${first_name} ${last_name}`} image={picture[0]} />
+      <MetaData
+        name={`${first_name} ${last_name}`}
+        image={picture[0]}
+        description={description}
+      />
 
       <ImageCarrousel data={picture} name={`${first_name} ${last_name}`} />
       <section>
