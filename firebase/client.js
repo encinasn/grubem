@@ -66,7 +66,7 @@ export const getPosts = () => {
     });
 };
 
-// dogs
+// ======================= DOGS
 
 const getRealDate = (date) => {
   const dateArray = date.split('-');
@@ -99,7 +99,7 @@ const normalizeDogs = (dogs) => {
   return { female, male, puppy };
 };
 
-export const getDogs = () => {
+export const getDogs = (ids) => {
   return db
     .collection('dogs')
     .get()
@@ -117,9 +117,34 @@ export const getDogs = () => {
         };
       });
 
-      return normalizeDogs(dogs);
+      return ids ? dogs : normalizeDogs(dogs);
     });
 };
+
+export const getDogById = async (id) => {
+  return db
+    .collection('dogs')
+    .doc(id)
+    .get()
+    .then((doc) => {
+      if (doc.exists) {
+        const data = doc.data();
+        const { dateOfBirth, createdAt } = data;
+
+        return {
+          ...data,
+          id,
+          dateOfBirth: +dateOfBirth.toDate(),
+          createdAt: +createdAt.toDate(),
+        };
+      } else {
+        return {};
+      }
+    })
+    .catch(() => {});
+};
+
+// ======================= IMAGES
 
 export const uploadImage = (file, folder) => {
   const storageRef = firebase.storage().ref().child(`${folder}/${file.name}`);

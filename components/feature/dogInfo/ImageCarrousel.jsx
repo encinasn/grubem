@@ -1,4 +1,4 @@
-import Carrousel, { consts} from 'react-elastic-carousel';
+import Carrousel, { consts } from 'react-elastic-carousel';
 // components
 import DogImage from './DogImage';
 // utils
@@ -26,9 +26,9 @@ const ImageCarrousel = ({
         }`}
       >
         {type === consts.PREV ? (
-          <HiOutlineChevronLeft size="3.8rem" />
+          <HiOutlineChevronLeft size="5rem" />
         ) : (
-          <HiOutlineChevronRight size="3.8rem" />
+          <HiOutlineChevronRight size="5rem" />
         )}
       </button>
     );
@@ -77,7 +77,36 @@ const ImageCarrousel = ({
           background-color: var(--black);
         }
 
+        .carrousel_image .rec.rec-slider-container {
+          margin: 0;
+        }
+
         @media screen and (min-width: ${BREAKPOINTS.tab}) {
+          .carrousel_image {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #000000;
+
+            aspect-ratio: 4 / 3;
+            height: 90vh;
+            width: auto;
+          }
+
+          .carrousel_image .rec.rec-carousel-wrapper {
+            position: relative;
+          }
+
+          .carrousel_image .rec.rec-pagination {
+            position: absolute;
+            bottom: 10px;
+          }
+          .carrousel_image .rec.rec-dot {
+            filter: drop-shadow(0 1px 10px #000000);
+          }
+          .carrousel_image .rec.rec-dot.rec.rec-dot_active {
+            background-color: var(--white);
+          }
           /* arrow */
 
           .carrousel_image .rec.rec-arrow {
@@ -90,6 +119,8 @@ const ImageCarrousel = ({
             color: var(--white);
             cursor: pointer;
             z-index: 10;
+
+            filter: drop-shadow(0 1px 10px #000000);
           }
           .carrousel_image .rec.rec-arrow[disabled] {
             visibility: hidden;

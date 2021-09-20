@@ -2,8 +2,6 @@ import TitleSection from '@shared/TitleSection';
 import ImageCarrousel from './ImageCarrousel';
 //icons
 import { IoMdFemale, IoMdMale } from 'react-icons/io';
-// utils
-import { BREAKPOINTS } from 'utils/breakpoints';
 // hook
 import useTimeAgo from 'hooks/useTimeAgo';
 import ButtonExternalLink from '@shared/ButtonExternalLink';
@@ -36,8 +34,8 @@ const DogInfo = ({ data }) => {
     <>
       <MetaData
         name={`${first_name} ${last_name}`}
-        description={description}
         image={picture[0]}
+        description={description}
       />
 
       <ImageCarrousel data={picture} name={`${first_name} ${last_name}`} />
@@ -53,7 +51,7 @@ const DogInfo = ({ data }) => {
           )}
         </div>
 
-        <TitleSection variant="h3" separator={false}>
+        <TitleSection variant="h3" separator={false} margin="0">
           {last_name}
         </TitleSection>
 
@@ -73,7 +71,6 @@ const DogInfo = ({ data }) => {
           path={pedigreeUrl}
           variant="primary"
           margin="1.6rem 0 0 0"
-          disabled={!pedigreeUrl}
         >
           Pedigree Database
         </ButtonExternalLink>
@@ -87,19 +84,6 @@ const DogInfo = ({ data }) => {
           display: flex;
           justify-content: space-between;
           align-items: center;
-        }
-
-        @media (min-width: ${BREAKPOINTS.tab}) {
-          section {
-            padding: 4rem 2.8rem 2.8rem;
-            height: 100%;
-          }
-          .name-gender {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: max-content;
-          }
         }
       `}</style>
     </>

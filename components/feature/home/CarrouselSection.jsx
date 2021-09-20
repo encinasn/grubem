@@ -10,14 +10,14 @@ const CarrouselSection = ({ preloadDogs }) => {
 
   return (
     <>
-        <>
-          <Section top="2.8rem" id="novedades">
-            <TitleSection variant="h2" section="Criadero">
-              Novedades
-            </TitleSection>
-          </Section>
-          <Carrousel data={[1,2,3,4]} />
-        </>
+      <>
+        <Section top="2.8rem" id="novedades">
+          <TitleSection variant="h2" section="Criadero">
+            Novedades
+          </TitleSection>
+        </Section>
+        <Carrousel data={[1, 2, 3, 4]} />
+      </>
 
       {dogs.puppy.length && (
         <>
@@ -26,7 +26,7 @@ const CarrouselSection = ({ preloadDogs }) => {
               Cachorros
             </TitleSection>
           </Section>
-          <Carrousel data={dogs.puppy} type="cachorro" />
+          <Carrousel data={dogs.puppy} />
         </>
       )}
 
@@ -37,7 +37,7 @@ const CarrouselSection = ({ preloadDogs }) => {
               Machos
             </TitleSection>
           </Section>
-          <Carrousel data={dogs.male} type="macho" />
+          <Carrousel data={dogs.male} />
         </>
       )}
 
@@ -48,11 +48,18 @@ const CarrouselSection = ({ preloadDogs }) => {
               Hembras
             </TitleSection>
           </Section>
-          <Carrousel data={dogs.female} type="hembra" />
+          <Carrousel data={dogs.female} />
         </>
       )}
+
+      <Section top="2.8rem" id="contacto">
+        <Separator />
+        <TitleSection variant="h2" separator={false}>
+          Contacto
+        </TitleSection>
+      </Section>
     </>
   );
 };
 
-export default CarrouselSection;
+export default CarrouselSection

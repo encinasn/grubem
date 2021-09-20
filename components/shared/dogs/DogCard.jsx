@@ -13,7 +13,6 @@ const DogCard = ({
   dateOfBirth = 1630163183,
   gender = 'male',
   available,
-  onClick = no_op,
 }) => {
   const dogGender = gender === 'female' ? 'Hembra' : 'Macho';
 
@@ -22,7 +21,7 @@ const DogCard = ({
 
   return (
     <>
-      <li onClick={onClick}>
+      <li>
         <div className="picture">
           {available && <div>Disponible</div>}
           <img src={picture} alt={`Fotografia de ${first_name}`} loading="lazy" />
