@@ -120,9 +120,6 @@ const ModalWrapper = ({
           z-index: 220;
           transform: translateY(-50%);
         }
-        .modal__close:hover {
-          background-color: rgb(0, 0, 0, 0.2);
-        }
 
         @media (min-width: ${BREAKPOINTS.tab}) {
           .modal__wrapper {
@@ -150,13 +147,25 @@ const ModalWrapper = ({
           }
           .modal__content {
             position: relative;
-            max-height: ${height};
-            min-width: 50rem;
-            max-width: 36vw;
+            height: max-content;
+            max-height: max-content;
+            min-width: 100rem;
+            max-width: 80vw;
             margin-top: 2rem;
             overflow: auto;
             box-shadow: var(--modal-shadow);
-            border-radius: 12px;
+            border-radius: var(--normal-radius);
+          }
+          .modal__relative {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            height: max-content;
+          }
+
+          .modal__close {
+            top: 50%;
+            right: 2rem;
+            color: var(--font);
           }
         }
       `}</style>

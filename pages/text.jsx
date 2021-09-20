@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import MetaDataDog from '@shared/MetaDataDog'
 
 const Text = () => {
   const [state, setState] = useState(false);
@@ -15,6 +16,7 @@ const Text = () => {
 
   return (
     <>
+    <MetaDataDog />
       <div className="wrapper">
         <div className={`menu ${state ? 'active' : ''}`} onClick={handleClick}>
           Holasdasd

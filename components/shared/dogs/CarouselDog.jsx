@@ -1,10 +1,7 @@
-import { useState } from 'react';
-import { useRouter } from 'next/router';
+import Link from 'next/link';
 import Carrousel, { consts } from 'react-elastic-carousel';
 // components
-import DogCard from '../../shared/dogs/DogCard';
-import Modal from '@feature/modal/ModalDogInfo';
-import DogInfo from '@feature/dogInfo/DogInfo';
+import DogCard from './DogCard';
 // utils
 import { BREAKPOINTS } from 'utils/breakpoints';
 // icons
@@ -50,20 +47,11 @@ const isMobile = () => {
   }
 };
 
-const CarrouselDogs = ({ data, type }) => {
-  const [modalData, setModalData] = useState(false);
+const CarrouselDogs = ({ data }) => {
+  // const modal = !!router.query[`${type}_id`];
 
-  const router = useRouter();
-  const modal = !!router.query[`${type}_id`];
-
-  const openModal = (id) =>
-    router.push(`/?${type}_id=${id}`, undefined, { shallow: true });
-  const closeModal = () => router.push('/', undefined, { shallow: true });
-
-  const handleClick = (dog) => {
-    setModalData(dog);
-    openModal(dog.id);
-  };
+  // const openModal = (id) => router.push(`/${id}`, undefined, { scroll: false });
+  // const closeModal = () => router.replace('/', undefined, { scroll: false });
 
   function recArrow({ type, onClick, isEdge }) {
     return (
@@ -98,25 +86,27 @@ const CarrouselDogs = ({ data, type }) => {
           itemPadding={[0, 24, 0, 0]}
         >
           {data.map((dog) => (
-            <DogCard
-              key={dog.id}
-              picture={dog.picture}
-              first_name={dog.first_name}
-              dateOfBirth={dog.dateOfBirth}
-              gender={dog.gender}
-              available={dog.available}
-              onClick={() => handleClick(dog)}
-            />
+            <Link href={`/${dog.id}`} key={dog.id}>
+              <a>
+                <DogCard
+                  picture={dog.picture}
+                  first_name={dog.first_name}
+                  dateOfBirth={dog.dateOfBirth}
+                  gender={dog.gender}
+                  available={dog.available}
+                />
+              </a>
+            </Link>
           ))}
-          <div className="last-item"></div>
+          {!isMobile() && <div></div>}
         </Carrousel>
       </div>
 
-      <Modal title="" isOpen={modal} closeModal={closeModal}>
-        <DogInfo data={modalData} />
-      </Modal>
-
       <style jsx global>{`
+        a {
+          width: 100%;
+        }
+        
         .carrousel_wrapper {
           width: 100%;
           padding: 0;

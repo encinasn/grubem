@@ -4,16 +4,16 @@ import { memo } from 'react';
 import { BREAKPOINTS } from 'utils/breakpoints';
 // hook
 import useTimeAgo from 'hooks/useTimeAgo';
+import Placholder from '@shared/svgs/placeholder';
 
 const no_op = () => {};
 
 const DogCard = ({
-  picture = '/images/photos/placeholder.png',
+  picture,
   first_name = 'Von der Grubem Land',
   dateOfBirth = 1630163183,
   gender = 'male',
   available,
-  onClick = no_op,
 }) => {
   const dogGender = gender === 'female' ? 'Hembra' : 'Macho';
 
@@ -22,10 +22,22 @@ const DogCard = ({
 
   return (
     <>
-      <li onClick={onClick}>
+      <li>
         <div className="picture">
           {available && <div>Disponible</div>}
-          <img src={picture} alt={`Fotografia de ${first_name}`} loading="lazy" />
+          {picture ? (
+            <img
+              src={picture}
+              alt={`Fotografia de ${first_name}`}
+              loading="lazy"
+            />
+          ) : (
+            <section>
+              <i>
+                <Placholder fill="#fafafa" className="placeholder" />
+              </i>
+            </section>
+          )}
         </div>
 
         <div className="info">
@@ -46,7 +58,7 @@ const DogCard = ({
         .picture {
           position: relative;
           width: 26rem;
-          height: max-content;
+          height: auto;
           aspect-ratio: 4 / 3;
           overflow: hidden;
           border-radius: 4px;
@@ -55,12 +67,13 @@ const DogCard = ({
           position: absolute;
           top: 8px;
           right: 8px;
-          text-transform: uppercase;
+
           color: var(--white);
           font-size: 1.2rem;
           padding: 0.4rem 0.8rem;
           border-radius: var(--normal-radius);
           background-color: var(--red);
+          text-transform: uppercase;
           opacity: 0.9;
           z-index: 8;
         }
@@ -74,6 +87,18 @@ const DogCard = ({
         }
         .picture:hover > img {
           transform: scale(1.15);
+        }
+
+        .picture > section {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+          height: 100%;
+          background-color: var(--grey-500);
+        }
+        .picture > section > i {
+          width: 14rem;
         }
 
         .info {
@@ -91,6 +116,9 @@ const DogCard = ({
           }
           .picture {
             width: 100%;
+          }
+          .picture > section > i {
+            width: 16rem;
           }
         }
       `}</style>

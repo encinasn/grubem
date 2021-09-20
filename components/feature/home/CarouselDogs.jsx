@@ -1,58 +1,56 @@
 import Separator from '@shared/Separator';
 import Section from '@shared/Section';
 import TitleSection from '@shared/TitleSection';
-import Carrousel from '@feature/home/Carrousel';
+import Carousel from '@shared/dogs/CarouselDog';
 // hook
 import useDogs from 'hooks/useDogs';
 
-const CarrouselSection = ({ preloadDogs }) => {
+const CarouselDogs = ({ preloadDogs }) => {
   const { dogs } = useDogs(preloadDogs);
 
   return (
     <>
-        <>
-          <Section top="2.8rem" id="novedades">
-            <TitleSection variant="h2" section="Criadero">
-              Novedades
-            </TitleSection>
-          </Section>
-          <Carrousel data={[1,2,3,4]} />
-        </>
-
-      {dogs.puppy.length && (
+      {dogs.puppy.length ? (
         <>
           <Section top="2.8rem" id="ejemplares">
             <TitleSection variant="h2" section="Ejemplares">
               Cachorros
             </TitleSection>
           </Section>
-          <Carrousel data={dogs.puppy} type="cachorro" />
+          <Carousel data={dogs.puppy} />
         </>
-      )}
+      ) : null}
 
-      {dogs.male.length && (
+      {dogs.male.length ? (
         <>
           <Section>
             <TitleSection variant="h2" separator={false}>
               Machos
             </TitleSection>
           </Section>
-          <Carrousel data={dogs.male} type="macho" />
+          <Carousel data={dogs.male} />
         </>
-      )}
+      ) : null}
 
-      {dogs.female.length && (
+      {dogs.female.length ? (
         <>
           <Section>
             <TitleSection variant="h2" separator={false}>
               Hembras
             </TitleSection>
           </Section>
-          <Carrousel data={dogs.female} type="hembra" />
+          <Carousel data={dogs.female} />
         </>
-      )}
+      ) : null}
+
+      <Section top="2.8rem" id="contacto">
+        <Separator />
+        <TitleSection variant="h2" separator={false}>
+          Contacto
+        </TitleSection>
+      </Section>
     </>
   );
 };
 
-export default CarrouselSection;
+export default CarouselDogs

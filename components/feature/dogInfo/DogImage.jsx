@@ -28,8 +28,8 @@ const DogImage = ({ url, name }) => {
 
         @media (min-width: ${BREAKPOINTS.tab}) {
           .picture {
-            min-width: 50rem;
-            max-width: 36vw;
+            height: 90vh;
+            width: auto;
           }
         }
       `}</style>

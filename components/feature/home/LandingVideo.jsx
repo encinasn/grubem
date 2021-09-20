@@ -19,7 +19,7 @@ const LandingVideo = () => {
 
         <div className="text">
           <h4>Von der</h4>
-          <h2>Grubem Land</h2>
+          <h1>Grubem Land</h1>
           {/* <p>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
@@ -67,12 +67,12 @@ const LandingVideo = () => {
         .text {
           z-index: 10;
         }
-        .text h2,
+        .text h1,
         .text h4 {
           color: var(--white);
           text-transform: uppercase;
         }
-        .text h2 {
+        .text h1 {
           font-size: 8rem;
           font-weight: 800;
           line-height: 10rem;
@@ -104,7 +104,7 @@ const LandingVideo = () => {
           section {
             padding: 80% var(--mobile-padding) 10rem;
           }
-          .text h2 {
+          .text h1 {
             font-size: 4.2rem;
             line-height: 4.8rem;
           }
