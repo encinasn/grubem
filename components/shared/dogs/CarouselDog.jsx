@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Carrousel, { consts } from 'react-elastic-carousel';
 // components
-import DogCard from '../../shared/dogs/DogCard';
+import DogCard from './DogCard';
 // utils
 import { BREAKPOINTS } from 'utils/breakpoints';
 // icons
@@ -103,6 +103,10 @@ const CarrouselDogs = ({ data }) => {
       </div>
 
       <style jsx global>{`
+        a {
+          width: 100%;
+        }
+        
         .carrousel_wrapper {
           width: 100%;
           padding: 0;

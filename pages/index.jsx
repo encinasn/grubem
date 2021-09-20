@@ -2,12 +2,9 @@ import Head from 'next/head';
 // layout
 import Layout from '@layout/Layout';
 // components
-import Separator from '@shared/Separator';
-import Section from '@shared/Section';
-import PostsList from '@shared/posts/PostsList';
 import LandingVideo from '@feature/home/LandingVideo';
-import TitleSection from '@shared/TitleSection';
-import CarrouselSection from '@feature/home/CarrouselSection';
+import CarouselDogs from '@feature/home/CarouselDogs';
+import CarouselPosts from '@feature/home/CarouselPosts';
 // services
 import { getDogs, getPosts } from 'firebase/client';
 
@@ -20,18 +17,12 @@ const HomePage = ({ posts, dogs }) => {
           <meta name="description" content="Criadero de perros ovejeros alemanes..." />
           <meta name="keywords" content="perros, ovejeros, ovejeros alemanes" />
         </Head>
+
         <LandingVideo />
 
-        <CarrouselSection preloadDogs={dogs} />
+        <CarouselPosts preloadPosts={posts} />
 
-        {/* <Section top="3rem" bottom="1rem">
-          <Separator />
-          <TitleSection variant="h2" section="criadero">
-            Ultimas publicaciones
-          </TitleSection>
-        </Section>
-
-        <PostsList preloadPosts={posts} /> */}
+        <CarouselDogs preloadDogs={dogs} />
       </Layout>
     </>
   );
