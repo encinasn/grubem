@@ -3,8 +3,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 // icons
 import { HiMenu, HiX } from 'react-icons/hi';
-// utils
-import { BREAKPOINTS } from 'utils/breakpoints';
 //hook
 import useDarkMode from 'hooks/useDarkMode';
 
@@ -41,7 +39,7 @@ const pages = [
   },
 ];
 
-const Navbar = () => {
+const NavbarMobile = () => {
   const [visible, setVisible] = useState(true);
   const [transparency, setTransparency] = useState(true);
   const [active, setActive] = useState(false);
@@ -77,22 +75,22 @@ const Navbar = () => {
     };
   }, []);
 
-  // useEffect(() => {
-  //   if (typeof window !== 'undefined') {
-  //     const hashId = window.location.hash;
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const hashId = window.location.hash;
 
-  //     if (hashId) {
-  //       const element = document.getElementById(hashId.replace('#', ''));
-  //       if (element) {
-  //         element.scrollIntoView({
-  //           behavior: 'smooth',
-  //           block: 'start',
-  //           inline: 'nearest',
-  //         });
-  //       }
-  //     }
-  //   }
-  // }, []);
+      if (hashId) {
+        const element = document.getElementById(hashId.replace('#', ''));
+        if (element) {
+          element.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start',
+            inline: 'nearest',
+          });
+        }
+      }
+    }
+  }, []);
 
   const handleClick = () => setActive(!active);
 
@@ -101,40 +99,18 @@ const Navbar = () => {
       <nav
         className={`
         ${transparency && !active ? 'transparent' : 'background'} 
-        ${visible ? 'visible' : ''} `}
+        ${visible ? 'visible' : ''} 
+        ${active && !visible ? 'active visible' : active ? 'active' : ''}`}
       >
         <div className="nav-layout">
-          <section className="navigation">        
-            <Link href="/#nosotros">
-              <a>
-                Nosotros
-                <div></div>
-              </a>
-            </Link>
-
-            <Link href="/#novedades">
-              <a>
-                Novedades
-                <div></div>
-              </a>
-            </Link>
-
-            <Link href="/#contacto">
-              <a>
-                Contacto
-                <div></div>
-              </a>
-            </Link>
-          </section>
-
           <section>
             <Link href="/">
               <a className="logo">
                 <Image
                   src="/images/brand/logo.png"
                   alt="Escudo de Von der Grubem Land"
-                  width={80}
-                  height={80}
+                  width={60}
+                  height={60}
                   layout="fixed"
                   priority
                 />
@@ -142,35 +118,31 @@ const Navbar = () => {
             </Link>
           </section>
 
-          <section className="navigation">
-            <Link href="/#cachorros">
-              <a>
-                Cachorros
-                <div></div>
-              </a>
-            </Link>
-
-            <Link href="/#machos">
-              <a>
-                Machos
-                <div></div>
-              </a>
-            </Link>
-
-            <Link href="/#hembras">
-              <a>
-                Hembras
-                <div></div>
-              </a>
-            </Link>
+          <section
+            className={`toggle ${active ? 'active' : ''}`}
+            onClick={handleClick}
+          >
+            {active ? <HiX size="4rem" /> : <HiMenu size="4rem" />}
           </section>
+        </div>
+
+        <div className={`menu ${active ? 'active' : ''}`}>
+          <ul>
+            {pages.map(({ id, name, path }) => (
+              <li key={id}>
+                <Link href={path}>
+                  <a>{name}</a>
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </nav>
 
       <style jsx>{`
         /* Logo */
 
-        /* Navbar */
+        /* NavbarMobile */
 
         nav {
           position: fixed;
@@ -191,16 +163,16 @@ const Navbar = () => {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          height: 10rem;
+          height: 8rem;
           width: 100%;
           transition: all 0.2s linear;
         }
         nav.transparent > .nav-layout {
-          height: 14rem;
+          height: 10rem;
           color: var(--white);
         }
         nav.background > .nav-layout {
-          height: 10rem;
+          height: 8rem;
           color: var(--font);
         }
 
@@ -216,53 +188,49 @@ const Navbar = () => {
           box-shadow: var(--normal-shadow);
         }
 
-        a.logo {
-          margin: 0 5.2rem;
+        .menu {
+          display: none;
         }
 
-        nav {
-          padding: 0 var(--desktop-padding);
-        }
-        nav > .nav-layout {
-          justify-content: center;
-        }
-
-        nav.active {
-          padding: 0 2rem;
-        }
-
-        .navigation {
-          display: flex;
-          align-items: center;
-        }
-        .navigation a {
-          padding: 0.8rem 1.6rem;
-          font-weight: 500;
-          font-size: 1.8rem;
-          border-radius: var(--normal-radius);
+        .toggle {
+          width: 4rem;
+          height: 4rem;
           cursor: pointer;
-          color: inherit;
-        }
-        .navigation a div {
-          margin: 2px 3px 0 3px;
-          height: 2.5px;
-          width: 0;
-          opacity: 0;
-          border-radius: 1000px;
-          background-color: var(--font);
-          transition: all 0.25s linear;
-        }
-        nav.transparent .navigation a div {
-          background-color: var(--red);
         }
 
-        .navigation > a:hover > div {
-          width: calc(100% - 6px);
-          opacity: 1;
+        /* Menu */
+        .menu {
+          position: relative;
+          top: 0;
+
+          flex-direction: column;
+          align-items: center;
+          justify-content: space-between;
+          width: 100%;
+          height: calc(100vh - 7.2rem);
+          padding: 0 0 12rem;
+          transition: all 0.3s linear;
+          background-color: var(--background);
+        }
+        .menu.active {
+          display: flex;
+          padding-top: 4rem;
+          bottom: 0;
+        }
+
+        .menu ul li {
+          margin: 2rem 0;
+        }
+        .menu ul li a {
+          font-size: 3.2rem;
+          color: var(--font);
+        }
+        .menu ul li a:hover {
+          color: var(--red);
         }
       `}</style>
     </>
   );
 };
 
-export default Navbar;
+export default NavbarMobile;

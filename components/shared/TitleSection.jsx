@@ -5,7 +5,7 @@ const TitleSection = ({
   children,
   variant = 'h1',
   separator = true,
-  margin = '2rem',
+  margin = '1.6rem',
 }) => {
   return (
     <>
@@ -39,7 +39,7 @@ const TitleSection = ({
         span.small {
           height: 0.2rem;
           width: 4rem;
-          margin: 1.2rem 0 0.8rem;
+          margin: 0.8rem 0 0.4rem;
         }
 
         h1 {

@@ -16,6 +16,12 @@ import useLockBodyScroll from 'hooks/useLockBodyScroll';
 // services
 import { getDogs, getDogById } from 'firebase/client';
 
+const isPuppy = (timestamp) => {
+  const now = Date.now();
+  const elapsed = (now - timestamp) / 1000;
+  return elapsed < 31556900;
+};
+
 const DogPage = ({ dog }) => {
   const {
     picture = [],
@@ -30,6 +36,12 @@ const DogPage = ({ dog }) => {
     hip,
     pedigreeUrl = '',
   } = dog;
+
+  const backUrl = isPuppy(dateOfBirth)
+    ? '/#cachorros'
+    : gender === 'female'
+    ? '/#hembras'
+    : '/#machos';
 
   const timeago = useTimeAgo(dateOfBirth);
   const age = timeago.replace('hace', '');
@@ -47,12 +59,12 @@ const DogPage = ({ dog }) => {
       />
 
       <div className="container">
-        <Link href="/#ejemplares">
+        <Link href={backUrl}>
           <a className="background"></a>
         </Link>
 
         <section className="layout">
-          <Link href="/#ejemplares">
+          <Link href={backUrl}>
             <a className="close">
               <HiX size="2.8rem" />
             </a>

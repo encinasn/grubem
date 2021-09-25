@@ -2,7 +2,7 @@ import { useState } from 'react';
 // components
 import Image from 'next/image';
 import Textarea from '@shared/posts/TextareaPosts';
-import FileIcon from '@shared/posts/FileIcon';
+import FileIcon from '@shared/FileIcon';
 import PostImage from '@shared/posts/PostImage';
 import Button from '@shared/Button';
 // utils
@@ -10,11 +10,21 @@ import { BREAKPOINTS } from 'utils/breakpoints';
 // hooks
 import usePosts from 'hooks/usePosts';
 import useUploadFile from 'hooks/useUploadFile';
+import DropImage from '@shared/DropImage';
 
 const ComposePost = ({ closeModal }) => {
   const [content, setContent] = useState('');
 
-  const { filesUrl, upload, deleteFile } = useUploadFile();
+  const date = new Date();
+  const {
+    filesUrl,
+    coverUrl,
+    loading: imgLoading,
+    uploadCover,
+    deleteCover,
+    upload,
+    deleteFile,
+  } = useUploadFile('posts', date.toDateString());
 
   const { createPost, loading, error } = usePosts();
 
@@ -46,18 +56,28 @@ const ComposePost = ({ closeModal }) => {
           disabled={loading.create}
         />
 
-        {filesUrl.length > 0 && filesUrl.map((img) => (
-          <PostImage imgUrl={img} onChange={deleteFile} key={img} />
-        ))}
+        {coverUrl.length > 0 &&
+          coverUrl.map((img) => (
+            <PostImage imgUrl={img} onChange={deleteCover} key={img} />
+          ))}
 
         <section className="add-to-post">
-          <span>Añadir a la publicación</span>
+          <span>Portada de la publicación</span>
           <FileIcon
-            name="picture"
-            onChange={upload}
+            name="cover"
+            onChange={uploadCover}
             disabled={loading.create}
           />
         </section>
+
+        <DropImage
+          label="Imagenes"
+          name="picture"
+          files={filesUrl}
+          onChange={upload}
+          deleteFile={deleteFile}
+          loading={imgLoading.images}
+        />
 
         <Button
           type="submit"
@@ -94,6 +114,7 @@ const ComposePost = ({ closeModal }) => {
           align-items: center;
           grid-template: auto / 1fr auto auto;
           padding: 0.4rem 1.2rem;
+          margin-bottom: 0.8rem;
           width: 100%;
           border: 1px solid var(--border);
           border-radius: var(--normal-radius);

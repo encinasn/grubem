@@ -12,7 +12,7 @@ const CarouselDogs = ({ preloadDogs }) => {
     <>
       {dogs.puppy.length ? (
         <>
-          <Section top="2.8rem" id="ejemplares">
+          <Section top="2.8rem" id="cachorros">
             <TitleSection variant="h2" section="Ejemplares">
               Cachorros
             </TitleSection>
@@ -23,7 +23,7 @@ const CarouselDogs = ({ preloadDogs }) => {
 
       {dogs.male.length ? (
         <>
-          <Section>
+          <Section top="3.2rem" id="machos">
             <TitleSection variant="h2" separator={false}>
               Machos
             </TitleSection>
@@ -34,7 +34,7 @@ const CarouselDogs = ({ preloadDogs }) => {
 
       {dogs.female.length ? (
         <>
-          <Section>
+          <Section top="3.2rem" id="hembras">
             <TitleSection variant="h2" separator={false}>
               Hembras
             </TitleSection>
@@ -45,7 +45,7 @@ const CarouselDogs = ({ preloadDogs }) => {
 
       <Section top="2.8rem" id="contacto">
         <Separator />
-        <TitleSection variant="h2" separator={false}>
+        <TitleSection variant="h2" section="Criadero">
           Contacto
         </TitleSection>
       </Section>
@@ -53,4 +53,4 @@ const CarouselDogs = ({ preloadDogs }) => {
   );
 };
 
-export default CarouselDogs
+export default CarouselDogs;

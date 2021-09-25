@@ -1,7 +1,7 @@
 // utils
 import { BREAKPOINTS } from 'utils/breakpoints';
 
-const ScrollToSection = () => {
+const ScrollToSection = ({children}) => {
   const handleClick = () => {
     window.scroll({
       top: window.innerHeight - 72,
@@ -12,19 +12,19 @@ const ScrollToSection = () => {
 
   return (
     <>
-      <button onClick={handleClick}>Ovejeros Alemanes</button>
+      <button onClick={handleClick}>{children}</button>
 
       <style jsx>{`
         button {
           display: inline-block;
           font-size: 1em;
-          background: var(--white);
+          background: var(--red);
           padding: 1rem 3rem;
           text-transform: uppercase;
           text-decoration: none;
           font-weight: 500;
           margin-top: 1.6rem;
-          color: #111;
+          color: var(--white);
           letter-spacing: 3px;
           transition: 0.2s;
           border-radius: var(--normal-radius);

@@ -2,22 +2,42 @@ import { useState } from 'react';
 // services
 import { uploadFiles } from 'firebase/client';
 
-const useUploadFile = () => {
+const useUploadFile = (folder, subFolder) => {
   const [filesUrl, setFilesUrl] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [coverUrl, setCoverUrl] = useState([]);
+  const [loading, setLoading] = useState({ images: false, cover: false });
 
-  const upload = async (folder, files) => {
-    setLoading(true);
-    const links = await uploadFiles(folder, files);
+  const upload = async (files) => {
+    setLoading({ ...loading, images: true });
+    const links = await uploadFiles(folder, subFolder, files);
     setFilesUrl(links);
-    setLoading(false);
+    setLoading({ ...loading, images: false });
+  };
+
+  const uploadCover = async (files) => {
+    setLoading({ ...loading, cover: true });
+    const link = await uploadFiles(folder, subFolder, files);
+    setCoverUrl(link);
+    setLoading({ ...loading, cover: false });
   };
 
   const deleteFile = (payload) => {
     setFilesUrl(filesUrl.filter((file) => file !== payload));
   };
 
-  return { filesUrl, loading, upload, deleteFile };
+  const deleteCover = () => {
+    setCoverUrl([]);
+  };
+
+  return {
+    filesUrl,
+    coverUrl,
+    loading,
+    upload,
+    uploadCover,
+    deleteFile,
+    deleteCover,
+  };
 };
 
 export default useUploadFile;
