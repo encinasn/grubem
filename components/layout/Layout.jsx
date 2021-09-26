@@ -1,13 +1,12 @@
 // layout
 import Navbar from '@layout/Navbar';
-import NavbarMobile from './NavbarMobile';
+import NavbarMobile from '@layout/NavbarMobile';
 import Footer from '@layout/footer/Footer';
 // utils
 import { BREAKPOINTS } from 'utils/breakpoints';
 
 const isMobile = () => {
   if (typeof window !== 'undefined') {
-    console.log(window.innerWidth < 600)
     return window.innerWidth < 600;
   }
 };

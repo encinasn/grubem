@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 // icons
-import { HiMenu, HiX } from 'react-icons/hi';
+import { BiMenu, BiX } from 'react-icons/bi';
 //hook
 import useDarkMode from 'hooks/useDarkMode';
 
@@ -41,31 +40,19 @@ const pages = [
 
 const NavbarMobile = () => {
   const [visible, setVisible] = useState(true);
-  const [transparency, setTransparency] = useState(true);
   const [active, setActive] = useState(false);
 
   const [enabled, setEnabled] = useDarkMode();
 
   useEffect(() => {
-    //let lastScroll = 0;
     const handleScroll = () => {
       const scroll = window.scrollY;
 
       if (scroll < 80) {
-        //setTransparency(true);
         setVisible(true);
       } else {
-        //setTransparency(false);
         setVisible(false);
       }
-
-      // if (scroll > lastScroll) {
-      //   setVisible(true);
-      // } else {
-      //   setVisible(true);
-      // }
-
-      //lastScroll = scroll;
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -98,31 +85,23 @@ const NavbarMobile = () => {
     <>
       <nav
         className={`
-        ${transparency && !active ? 'transparent' : 'background'} 
+        ${!active ? 'transparent' : 'background'} 
         ${visible ? 'visible' : ''} 
         ${active && !visible ? 'active visible' : active ? 'active' : ''}`}
       >
         <div className="nav-layout">
-          <section>
-            <Link href="/">
-              <a className="logo">
-                <Image
-                  src="/images/brand/logo.png"
-                  alt="Escudo de Von der Grubem Land"
-                  width={60}
-                  height={60}
-                  layout="fixed"
-                  priority
-                />
-              </a>
-            </Link>
+          <section className="logo">
+            <img
+              src="/images/brand/logo.png"
+              alt="Escudo de Von der Grubem Land"
+            />
           </section>
 
           <section
             className={`toggle ${active ? 'active' : ''}`}
             onClick={handleClick}
           >
-            {active ? <HiX size="4rem" /> : <HiMenu size="4rem" />}
+            {active ? <BiX size="4rem" /> : <BiMenu size="4rem" />}
           </section>
         </div>
 
@@ -141,6 +120,18 @@ const NavbarMobile = () => {
 
       <style jsx>{`
         /* Logo */
+
+        .logo {
+          width: 7rem;
+          height: 7rem;
+          overflow: hidden;
+        }
+        .logo > img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+        }
 
         /* NavbarMobile */
 

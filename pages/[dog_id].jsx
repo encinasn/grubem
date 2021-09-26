@@ -3,7 +3,7 @@ import ImageCarrousel from '@feature/dogInfo/ImageCarrousel';
 import Link from 'next/link';
 //icons
 import { IoMdFemale, IoMdMale } from 'react-icons/io';
-import { HiX } from 'react-icons/hi';
+import { HiArrowLeft, HiOutlineShare } from 'react-icons/hi';
 // utils
 import { BREAKPOINTS } from 'utils/breakpoints';
 // hook
@@ -15,6 +15,7 @@ import MetaData from '@shared/MetaDataDog';
 import useLockBodyScroll from 'hooks/useLockBodyScroll';
 // services
 import { getDogs, getDogById } from 'firebase/client';
+import Available from '@feature/dogInfo/Available';
 
 const isPuppy = (timestamp) => {
   const now = Date.now();
@@ -29,6 +30,7 @@ const DogPage = ({ dog }) => {
     first_name,
     last_name,
     dateOfBirth = 1630163183,
+    available,
     selection,
     femaleParent,
     maleParent,
@@ -64,29 +66,43 @@ const DogPage = ({ dog }) => {
         </Link>
 
         <section className="layout">
-          <Link href={backUrl}>
-            <a className="close">
-              <HiX size="2.8rem" />
-            </a>
-          </Link>
-
           <ImageCarrousel data={picture} name={`${first_name} ${last_name}`} />
 
           <section className="info">
-            <div className="name-gender">
-              <TitleSection variant="h3" separator={false} margin="0">
-                {first_name}
-              </TitleSection>
-              {gender === 'female' ? (
-                <IoMdFemale size="2.4rem" color="var(--grey-700)" />
-              ) : (
-                <IoMdMale size="2.4rem" color="var(--grey-700)" />
-              )}
+            <div className="actions">
+              <Link href={backUrl}>
+                <a className="close">
+                  <HiArrowLeft size="2.4rem" />
+                </a>
+              </Link>
+
+              <div className="share">
+                Compartir
+                <span className="share_icon">
+                  <HiOutlineShare size="2rem" />
+                </span>
+              </div>
             </div>
 
-            <TitleSection variant="h3" separator={false}>
+            <div className="name-gender">
+              <TitleSection variant="h1" section="ejemplar" margin="0.4rem">
+                {first_name}
+              </TitleSection>
+
+              <span className="gender_icon">
+                {gender === 'female' ? (
+                  <IoMdFemale size="2.4rem" />
+                ) : (
+                  <IoMdMale size="2.4rem" />
+                )}
+              </span>
+            </div>
+
+            <TitleSection variant="h2" separator={false}>
               {last_name}
             </TitleSection>
+
+            <Available value={available} />
 
             <ItemDetail title="Selección" first>
               {selection}
@@ -100,14 +116,16 @@ const DogPage = ({ dog }) => {
             <ItemDetail title="Placa de codo">{elbow && 'Si'}</ItemDetail>
             <ItemDetail title="Placa de cadera">{hip && 'Si'}</ItemDetail>
 
-            <ButtonExternalLink
-              path={pedigreeUrl}
-              variant="primary"
-              margin="1.6rem 0 0 0"
-              disabled={!pedigreeUrl}
-            >
-              Pedigree Database
-            </ButtonExternalLink>
+            <div className="link_button">
+              <ButtonExternalLink
+                path={pedigreeUrl}
+                variant="red"
+                margin="1.6rem 0 0 0"
+                //disabled={!pedigreeUrl}
+              >
+                Pedigree Database
+              </ButtonExternalLink>
+            </div>
           </section>
         </section>
       </div>
@@ -138,25 +156,60 @@ const DogPage = ({ dog }) => {
           z-index: 200;
         }
 
+        .share,
         a.close {
-          position: absolute;
-          top: 16px;
-          right: 16px;
-          color: var(--white);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 3.6rem;
+
+          color: var(--font);
+          background-color: var(--background);
+          border-radius: 10rem;
           cursor: pointer;
           z-index: 210;
-          filter: drop-shadow(0 1px 10px #000000);
+        }
+        a.close {
+          width: 3.6rem;
+        }
+        .share {
+          padding: 0 1.6rem;
+          font-weight: 500;
         }
 
         section.info {
           padding: 0 2.8rem 2.8rem;
         }
+
         .name-gender {
           display: flex;
           justify-content: space-between;
-          align-items: center;
+          align-items: flex-end;
+        }
+        .gender_icon {
+          height: 2.4rem;
+          margin-bottom: 1rem;
+          color: var(--red);
+          opacity: 0.8;
         }
 
+        @media (max-width: ${BREAKPOINTS.tab}) {
+          .share,
+          a.close {
+            position: absolute;
+            top: 16px;
+          }
+          a.close {
+            left: 16px;
+          }
+          .share {
+            right: 16px;
+          }
+
+          .share_icon {
+            display: none;
+          }
+        }
         @media (min-width: ${BREAKPOINTS.tab}) {
           div.container {
             display: flex;
@@ -164,27 +217,43 @@ const DogPage = ({ dog }) => {
             justify-content: center;
           }
           section.layout {
-            grid-template: 1fr/ 1fr auto;
-            width: auto;
-            height: 90vh;
+            grid-template: 1fr / auto 1fr;
+            width: 100vw;
+            height: 100vh;
             min-height: 0;
             overflow: hidden;
           }
 
-          a.close {
-            color: var(--font);
-            filter: none;
-          }
-
           section.info {
-            padding: 4rem 2.8rem 2.8rem;
+            padding: 2.8rem 6rem 2.8rem;
             height: 100%;
           }
-          .name-gender {
+
+          .actions {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            width: max-content;
+            margin-bottom: 3.2rem;
+          }
+
+          a.close,
+          .share {
+            border: 1px solid var(--border);
+          }
+          a.close {
+          }
+          .share {
+            font-size: 1.6rem;
+          }
+          .share_icon {
+            height: 2rem;
+            margin-left: 0.8rem;
+          }
+          .gender_icon {
+            margin-bottom: 1.6rem;
+          }
+
+          .link_button {
+            width: 60%;
           }
         }
       `}</style>

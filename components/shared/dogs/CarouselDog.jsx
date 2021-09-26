@@ -110,7 +110,7 @@ const CarrouselDogs = ({ data }) => {
           width: 100%;
           padding: 0;
         }
-        .rec.rec-slider-container {
+        .carrousel_wrapper .rec.rec-slider-container {
           margin: 0;
         }
         .carrousel_wrapper .rec.rec-slider {
@@ -121,7 +121,7 @@ const CarrouselDogs = ({ data }) => {
           .carrousel_wrapper .rec.rec-slider {
             margin: 0 var(--desktop-padding);
           }
-          .rec.rec-carousel {
+          .carrousel_wrapper .rec.rec-carousel {
             position: relative;
           }
 

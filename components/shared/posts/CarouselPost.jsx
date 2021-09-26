@@ -22,17 +22,17 @@ const recBreakPoints = [
   },
   {
     width: 600,
-    itemsToShow: 2.3,
+    itemsToShow: 2,
     itemsToScroll: 2,
   },
   {
     width: 1000,
-    itemsToShow: 2.7,
+    itemsToShow: 3,
     itemsToScroll: 2,
   },
   {
     width: 1200,
-    itemsToShow: 3.5,
+    itemsToShow: 3,
     itemsToScroll: 3,
   },
 ];
@@ -59,9 +59,9 @@ const CarrouselPosts = ({ data }) => {
         }`}
       >
         {type === consts.PREV ? (
-          <HiOutlineChevronLeft size="3.8rem" className="arrow-icon"/>
+          <HiOutlineChevronLeft size="3.8rem" className="arrow-icon" />
         ) : (
-          <HiOutlineChevronRight size="3.8rem" className="arrow-icon"/>
+          <HiOutlineChevronRight size="3.8rem" className="arrow-icon" />
         )}
       </button>
     );
@@ -94,7 +94,6 @@ const CarrouselPosts = ({ data }) => {
               </a>
             </Link>
           ))}
-          {!isMobile() && <div></div>}
         </Carrousel>
       </div>
 
@@ -107,16 +106,20 @@ const CarrouselPosts = ({ data }) => {
           width: 100%;
           padding: 0;
         }
-        .rec.rec-slider-container {
+        .carrousel_wrapper_posts .rec.rec-slider-container {
           margin: 0;
         }
+
         .carrousel_wrapper_posts .rec.rec-slider {
           margin: 0 var(--mobile-padding);
         }
 
         @media screen and (min-width: ${BREAKPOINTS.tab}) {
-          .carrousel_wrapper_posts .rec.rec-slider {
+          .carrousel_wrapper_posts .rec.rec-slider-container {
             margin: 0 var(--desktop-padding);
+          }
+          .carrousel_wrapper_posts .rec.rec-slider {
+            margin: 0;
           }
           .rec.rec-carousel {
             position: relative;
@@ -152,7 +155,7 @@ const CarrouselPosts = ({ data }) => {
           .rec.rec-arrow:focus,
           .rec.rec-arrow:focus:enabled {
             color: var(--arrow-slider-color);
-          }   
+          }
         }
       `}</style>
     </>

@@ -220,7 +220,6 @@ const compressCover = async (files) => {
         quality: 0.4,
         width: 800,
         success(result) {
-          //console.dir({ original: file.size, comprimido: result.size });
           compressedFiles.push(result);
         },
       });

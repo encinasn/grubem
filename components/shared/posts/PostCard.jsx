@@ -118,6 +118,9 @@ const PostCard = ({
         }
 
         @media (min-width: ${BREAKPOINTS.tab}) {
+          .picture {
+            width: 12rem;
+          }
           .info {
             width: calc(100% - 2rem);
           }

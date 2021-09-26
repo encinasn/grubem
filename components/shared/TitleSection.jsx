@@ -32,9 +32,9 @@ const TitleSection = ({
           background-color: var(--red);
         }
         span.large {
-          height: 0.4rem;
-          width: 6rem;
-          margin: 1.6rem 0 1.2rem;
+          height: 0.2rem;
+          width: 4.8rem;
+          margin: 0.6rem 0 0.6rem;
         }
         span.small {
           height: 0.2rem;
@@ -43,9 +43,9 @@ const TitleSection = ({
         }
 
         h1 {
-          font-size: 4rem;
+          font-size: 3.2rem;
           font-weight: 600;
-          line-height: 5rem;
+          line-height: 4rem;
           color: inherit;
         }
 
@@ -72,8 +72,8 @@ const TitleSection = ({
 
         @media screen and (min-width: ${BREAKPOINTS.tab}) {
           h1 {
-            font-size: 6rem;
-            line-height: 7rem;
+            font-size: 4.4rem;
+            line-height: 5rem;
           }
           h2 {
             font-size: 4rem;

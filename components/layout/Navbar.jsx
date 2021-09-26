@@ -43,31 +43,18 @@ const pages = [
 
 const Navbar = () => {
   const [visible, setVisible] = useState(true);
-  const [transparency, setTransparency] = useState(true);
-  const [active, setActive] = useState(false);
 
   const [enabled, setEnabled] = useDarkMode();
 
   useEffect(() => {
-    //let lastScroll = 0;
     const handleScroll = () => {
       const scroll = window.scrollY;
 
-      if (scroll < 80) {
-        //setTransparency(true);
+      if (scroll < 40) {
         setVisible(true);
       } else {
-        //setTransparency(false);
         setVisible(false);
       }
-
-      // if (scroll > lastScroll) {
-      //   setVisible(true);
-      // } else {
-      //   setVisible(true);
-      // }
-
-      //lastScroll = scroll;
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -94,17 +81,11 @@ const Navbar = () => {
   //   }
   // }, []);
 
-  const handleClick = () => setActive(!active);
-
   return (
     <>
-      <nav
-        className={`
-        ${transparency && !active ? 'transparent' : 'background'} 
-        ${visible ? 'visible' : ''} `}
-      >
+      <nav className={`transparent ${visible ? 'visible' : ''} `}>
         <div className="nav-layout">
-          <section className="navigation">        
+          <section className="navigation">
             <Link href="/#nosotros">
               <a>
                 Nosotros
@@ -133,8 +114,8 @@ const Navbar = () => {
                 <Image
                   src="/images/brand/logo.png"
                   alt="Escudo de Von der Grubem Land"
-                  width={80}
-                  height={80}
+                  width={100}
+                  height={100}
                   layout="fixed"
                   priority
                 />
@@ -199,10 +180,6 @@ const Navbar = () => {
           height: 14rem;
           color: var(--white);
         }
-        nav.background > .nav-layout {
-          height: 10rem;
-          color: var(--font);
-        }
 
         nav.transparent {
           background: linear-gradient(
@@ -210,10 +187,6 @@ const Navbar = () => {
             rgba(32, 32, 32, 0.8998949921765581) 0%,
             rgba(32, 32, 32, 0) 100%
           );
-        }
-        nav.background {
-          background: var(--background);
-          box-shadow: var(--normal-shadow);
         }
 
         a.logo {

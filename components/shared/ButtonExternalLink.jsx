@@ -89,6 +89,19 @@ const ButtonExternalLink = ({
           background-color: var(--grey-500);
         }
 
+        a.red {
+          color: var(--white);
+          background-color: var(--red);
+          border: 1.8px solid var(--red);
+        }
+        a.red[disabled] {
+          border: 1.8px solid var(--grey-500);
+          background-color: var(--grey-500);
+        }
+        a.red:focus  {
+          box-shadow: 0 0 0 0.16em #b93b3b1a;
+        }
+
         a.secondary {
           color: var(--grey-500);
           border: 1.8px solid var(--grey-300);
@@ -118,6 +131,10 @@ const ButtonExternalLink = ({
         a.primary:hover {
           border: 1.8px solid var(--grey-700);
           background: var(--grey-700);
+        }
+        a.red:hover {
+          border: 1.8px solid var(--red-700);
+          background: var(--red-700);
         }
         a.secondary:hover {
           border: 1.8px solid var(--black);
