@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { useEffect } from 'react';
 // layout
 import Layout from '@layout/Layout';
 // components
@@ -14,7 +15,10 @@ const HomePage = ({ posts, dogs }) => {
       <Layout>
         <Head>
           <title>Ovejeros Alemanes - Von der Grubem Land</title>
-          <meta name="description" content="Criadero de perros ovejeros alemanes..." />
+          <meta
+            name="description"
+            content="Criadero de perros ovejeros alemanes..."
+          />
           <meta name="keywords" content="perros, ovejeros, ovejeros alemanes" />
         </Head>
 

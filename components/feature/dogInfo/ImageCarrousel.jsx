@@ -89,7 +89,7 @@ const ImageCarrousel = ({
             background-color: #000000;
 
             aspect-ratio: 4 / 3;
-            height: 90vh;
+            height: 100vh;
             width: auto;
           }
 

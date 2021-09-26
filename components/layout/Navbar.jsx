@@ -8,22 +8,53 @@ import { BREAKPOINTS } from 'utils/breakpoints';
 //hook
 import useDarkMode from 'hooks/useDarkMode';
 
-const isMobile = () => {
-  if (typeof window !== 'undefined') {
-    return window.innerWidth < 600;
-  }
-};
+const pages = [
+  {
+    id: 1,
+    name: 'Inicio',
+    path: '/',
+  },
+  {
+    id: 2,
+    name: 'Novedades',
+    path: '/#novedades',
+  },
+  {
+    id: 3,
+    name: 'Nosotros',
+    path: '/#nosotros',
+  },
+  {
+    id: 4,
+    name: 'Cachorros',
+    path: '/#cachorros',
+  },
+  {
+    id: 5,
+    name: 'Machos',
+    path: '/#machos',
+  },
+  {
+    id: 6,
+    name: 'Hembras',
+    path: '/#hembras',
+  },
+];
 
 const Navbar = () => {
-  const [visible, setVisible] = useState(false);
-  const [active, setActive] = useState(false);
+  const [visible, setVisible] = useState(true);
 
   const [enabled, setEnabled] = useDarkMode();
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 60) setVisible(true);
-      if (window.scrollY < 60) setVisible(false);
+      const scroll = window.scrollY;
+
+      if (scroll < 40) {
+        setVisible(true);
+      } else {
+        setVisible(false);
+      }
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -33,43 +64,58 @@ const Navbar = () => {
     };
   }, []);
 
-  useEffect(() => {
-    console.log('hola')
-    if (typeof window !== 'undefined') {
-      const hashId = window.location.hash;
+  // useEffect(() => {
+  //   if (typeof window !== 'undefined') {
+  //     const hashId = window.location.hash;
 
-      if (hashId) {
-        const element = document.getElementById(hashId.replace('#', ''));
-        if (element) {
-          element.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start',
-            inline: 'nearest',
-          });
-        }
-      }
-    }
-  }, []);
+  //     if (hashId) {
+  //       const element = document.getElementById(hashId.replace('#', ''));
+  //       if (element) {
+  //         element.scrollIntoView({
+  //           behavior: 'smooth',
+  //           block: 'start',
+  //           inline: 'nearest',
+  //         });
+  //       }
+  //     }
+  //   }
+  // }, []);
 
-  const handleClick = () => setActive(!active);
-
-  //fb, ig , whatsapp
   return (
     <>
-      <nav
-        className={`${!visible && !active ? 'transparent' : 'background'} ${
-          active ? 'active' : ''
-        }`}
-      >
+      <nav className={`transparent ${visible ? 'visible' : ''} `}>
         <div className="nav-layout">
+          <section className="navigation">
+            <Link href="/#nosotros">
+              <a>
+                Nosotros
+                <div></div>
+              </a>
+            </Link>
+
+            <Link href="/#novedades">
+              <a>
+                Novedades
+                <div></div>
+              </a>
+            </Link>
+
+            <Link href="/#contacto">
+              <a>
+                Contacto
+                <div></div>
+              </a>
+            </Link>
+          </section>
+
           <section>
             <Link href="/">
-              <a>
+              <a className="logo">
                 <Image
-                  src="/images/brand/logo-horizontal.png"
+                  src="/images/brand/logo.png"
                   alt="Escudo de Von der Grubem Land"
-                  width={250}
-                  height={40}
+                  width={100}
+                  height={100}
                   layout="fixed"
                   priority
                 />
@@ -77,106 +123,51 @@ const Navbar = () => {
             </Link>
           </section>
 
-          {isMobile() ? (
-            <section
-              className={`toggle ${active ? 'active' : ''}`}
-              onClick={handleClick}
-            >
-              {active ? <HiX size="4rem" /> : <HiMenu size="4rem" />}
-            </section>
-          ) : (
-            <section className="navigation">
-              <Link href="/">
-                <a>
-                  Inicio
-                  <div></div>
-                </a>
-              </Link>
+          <section className="navigation">
+            <Link href="/#cachorros">
+              <a>
+                Cachorros
+                <div></div>
+              </a>
+            </Link>
 
-              <Link href="/#nosotros">
-                <a>
-                  Nosotros
-                  <div></div>
-                </a>
-              </Link>
+            <Link href="/#machos">
+              <a>
+                Machos
+                <div></div>
+              </a>
+            </Link>
 
-              <Link href="/#novedades">
-                <a>
-                  Novedades
-                  <div></div>
-                </a>
-              </Link>
-
-              <Link href="/#ejemplares">
-                <a>
-                  Ejemplares
-                  <div></div>
-                </a>
-              </Link>
-
-              <Link href="/#contacto">
-                <a>
-                  Contacto
-                  <div></div>
-                </a>
-              </Link>
-            </section>
-          )}
-        </div>
-
-        <div className={`menu ${active ? 'active' : ''}`}>
-          <ul>
-            <li>
-              <Link href="/">
-                <a>Inicio</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/competencias">
-                <a>Competencias</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/aprender">
-                <a>Aprender</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/contacto">
-                <a>Contacto</a>
-              </Link>
-            </li>
-          </ul>
-
-          <Link href="/admin/ingresar">
-            <a className="admin">
-              <Image
-                src="/images/brand/logo.png"
-                alt="Escudo de Von der Grubem Land"
-                width={120}
-                height={120}
-                layout="fixed"
-              />
-            </a>
-          </Link>
+            <Link href="/#hembras">
+              <a>
+                Hembras
+                <div></div>
+              </a>
+            </Link>
+          </section>
         </div>
       </nav>
 
       <style jsx>{`
+        /* Logo */
+
         /* Navbar */
 
         nav {
           position: fixed;
-          top: 0;
+          top: -14rem;
 
           height: max-content;
           max-height: 100vh;
           width: 100vw;
           padding: 0 var(--mobile-padding);
-          color: var(--white);
-          background: rgb(32, 32, 32);
           z-index: 50;
+          transition: top 0.2s ease;
         }
+        nav.visible {
+          top: 0;
+        }
+
         nav > .nav-layout {
           display: flex;
           justify-content: space-between;
@@ -186,11 +177,7 @@ const Navbar = () => {
           transition: all 0.2s linear;
         }
         nav.transparent > .nav-layout {
-          height: 10rem;
-          color: var(--white);
-        }
-        nav.background > .nav-layout {
-          height: 7.2rem;
+          height: 14rem;
           color: var(--white);
         }
 
@@ -201,97 +188,50 @@ const Navbar = () => {
             rgba(32, 32, 32, 0) 100%
           );
         }
-        nav.background {
-          background: linear-gradient(
-            180deg,
-            rgba(32, 32, 32, 1) 0%,
-            rgba(32, 32, 32, 0.7990546560421043) 100%
-          );
-          backdrop-filter: blur(4px);
+
+        a.logo {
+          margin: 0 5.2rem;
         }
 
-        .menu {
-          display: none;
+        nav {
+          padding: 0 var(--desktop-padding);
+        }
+        nav > .nav-layout {
+          justify-content: center;
         }
 
-        @media screen and (max-width: ${BREAKPOINTS.tab}) {
-          .toggle {
-            width: 4rem;
-            height: 4rem;
-            cursor: pointer;
-          }
-
-          /* Menu */
-          .menu {
-            position: relative;
-            top: 0;
-
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-            height: calc(100vh - 7.2rem);
-            padding: 0 0 12rem;
-            transition: all 0.3s linear;
-          }
-          .menu.active {
-            display: flex;
-            padding-top: 6rem;
-            bottom: 0;
-          }
-          .menu .admin {
-            cursor: default;
-          }
-
-          .menu ul li {
-            margin: 2rem 0;
-          }
-          .menu ul li a {
-            font-size: 3.2rem;
-            color: var(--white);
-          }
-          .menu ul li a:hover {
-            color: var(--red);
-          }
+        nav.active {
+          padding: 0 2rem;
         }
 
-        @media screen and (min-width: ${BREAKPOINTS.tab}) {
-          nav {
-            padding: 0 var(--desktop-padding);
-          }
-          nav.active {
-            padding: 0 2rem;
-          }
+        .navigation {
+          display: flex;
+          align-items: center;
+        }
+        .navigation a {
+          padding: 0.8rem 1.6rem;
+          font-weight: 500;
+          font-size: 1.8rem;
+          border-radius: var(--normal-radius);
+          cursor: pointer;
+          color: inherit;
+        }
+        .navigation a div {
+          margin: 2px 3px 0 3px;
+          height: 2.5px;
+          width: 0;
+          opacity: 0;
+          border-radius: 1000px;
+          background-color: var(--font);
+          transition: all 0.25s linear;
+        }
+        nav.transparent .navigation a div {
+          background-color: var(--red);
+        }
 
-          .navigation {
-            display: flex;
-            align-items: center;
-          }
-          .navigation a {
-            padding: 0.8rem 1.6rem;
-            font-weight: 500;
-            font-size: 1.6rem;
-            border-radius: var(--normal-radius);
-            cursor: pointer;
-            color: var(--white);
-          }
-          .navigation a div {
-            margin: 3px 2px 0;
-            height: 2.5px;
-            width: 0;
-            opacity: 0;
-            border-radius: 1000px;
-            background-color: var(--white);
-            transition: all 0.25s linear;
-          }
-          .navigation > a:hover > div {
-            width: calc(100% - 4px);
-            opacity: 1;
-          }
-
-          .navigation > a.primary {
-            border: 1px solid var(--white);
-          }
+        .navigation > a:hover > div {
+          width: calc(100% - 6px);
+          opacity: 1;
         }
       `}</style>
     </>

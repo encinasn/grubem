@@ -19,6 +19,7 @@ const Section = forwardRef(
         <section ref={ref} id={id}>
           {children}
         </section>
+
         <style jsx>{`
           section {
             position: relative;
@@ -27,13 +28,16 @@ const Section = forwardRef(
             margin: ${margin};
             padding-right: var(--mobile-padding);
             padding-left: var(--mobile-padding);
-            padding-top: ${top};
-            padding-bottom: ${bottom};
+            padding-top: calc(${top} - 8px);
+            padding-bottom: calc(${bottom} - 8px);
           }
+
           @media screen and (min-width: ${BREAKPOINTS.tab}) {
             section {
               padding-right: var(--desktop-padding);
               padding-left: var(--desktop-padding);
+              padding-top: ${top};
+              padding-bottom: ${bottom};
             }
           }
         `}</style>

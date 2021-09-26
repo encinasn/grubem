@@ -146,12 +146,7 @@ export const getDogById = async (id) => {
 
 // ======================= IMAGES
 
-export const uploadImage = (file, folder) => {
-  const storageRef = firebase.storage().ref().child(`${folder}/${file.name}`);
-  return storageRef.put(file);
-};
-
-export const uploadFiles = async (folder, files) => {
+export const uploadFiles = async (folder, subFolder, files) => {
   let tasks = [];
 
   return compressFiles(files)
@@ -160,7 +155,7 @@ export const uploadFiles = async (folder, files) => {
         const task = firebase
           .storage()
           .ref()
-          .child(`${folder}/${file.name}`)
+          .child(`${folder}/${subFolder}/${file.name}`)
           .put(file)
           .then((snap) => snap.ref.getDownloadURL())
           .catch((err) => console.log(err));
@@ -177,7 +172,7 @@ const compressFiles = async (files) => {
 
     for (let file of files) {
       new Compressor(file, {
-        quality: 0.6,
+        quality: 0.8,
         width: 1280,
         success(result) {
           //console.dir({ original: file.size, comprimido: result.size });
@@ -191,5 +186,47 @@ const compressFiles = async (files) => {
     setTimeout(() => {
       resolve(compressedFiles);
     }, time);
+  });
+};
+
+// ======================= Cover
+
+export const uploadCover = async (folder, subFolder, files) => {
+  let tasks = [];
+
+  return compressCover(files)
+    .then((compressedFiles) => {
+      for (let file of compressedFiles) {
+        const task = firebase
+          .storage()
+          .ref()
+          .child(`${folder}/${subFolder}/${file.name}`)
+          .put(file)
+          .then((snap) => snap.ref.getDownloadURL())
+          .catch((err) => console.log(err));
+
+        tasks.push(task);
+      }
+    })
+    .then(() => Promise.all(tasks).then((links) => links));
+};
+
+const compressCover = async (files) => {
+  return new Promise((resolve, reject) => {
+    let compressedFiles = [];
+
+    for (let file of files) {
+      new Compressor(file, {
+        quality: 0.4,
+        width: 800,
+        success(result) {
+          compressedFiles.push(result);
+        },
+      });
+    }
+
+    setTimeout(() => {
+      resolve(compressedFiles);
+    }, 1000);
   });
 };

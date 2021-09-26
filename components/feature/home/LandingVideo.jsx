@@ -1,6 +1,6 @@
 // components
 import SocialMedia from '@layout/footer/SocialMedia';
-import ScrollToSection from './ScrollToSection';
+import CallToAction from './CallToAction';
 // utils
 import { BREAKPOINTS } from 'utils/breakpoints';
 
@@ -18,19 +18,10 @@ const LandingVideo = () => {
         <div className="overlay"></div>
 
         <div className="text">
-          <h4>Von der</h4>
-          <h1>Grubem Land</h1>
-          {/* <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
-          </p> */}
-          <ScrollToSection />
-        </div>
-
-        <div className="social">
-          <SocialMedia />
+          <h4>Von der grubem land</h4>
+          <h1>Ovejeros Alemanes</h1>
+          <CallToAction>ver mas</CallToAction>
+          {/* <h1 className="hidden-h1">Ovejeros Alemanes</h1> */}
         </div>
       </section>
 
@@ -40,8 +31,13 @@ const LandingVideo = () => {
           display: flex;
           align-items: center;
           width: 100%;
-          height: 100vh;
+          height: 84vh;
           padding: 10rem var(--desktop-padding);
+        }
+
+        .hidden-h1 {
+          user-select: none;
+          opacity: 0;
         }
 
         video {
@@ -49,7 +45,7 @@ const LandingVideo = () => {
           top: 0;
           left: 0;
           width: 100%;
-          height: 100vh;
+          height: 105vh;
           object-fit: cover;
           opacity: 0.8;
         }
@@ -65,48 +61,54 @@ const LandingVideo = () => {
         }
 
         .text {
+          margin-top: 20%;
           z-index: 10;
         }
         .text h1,
         .text h4 {
           color: var(--white);
           text-transform: uppercase;
+          text-shadow: 0 1px 12px rgba(0, 0, 0, 0.2);
         }
         .text h1 {
-          font-size: 8rem;
+          font-size: 6rem;
           font-weight: 800;
-          line-height: 10rem;
+          line-height: 7rem;
         }
         .text h4 {
-          font-size: 4rem;
+          font-size: 3rem;
           font-weight: 700;
           line-height: 4rem;
         }
         .text p {
           font-size: 1.1em;
-          color: #fff;
+          color: var(--white);
           margin: 20px 0;
           font-weight: 400;
           max-width: 700px;
         }
 
-        .social {
-          position: absolute;
-          z-index: 10;
-          bottom: 3rem;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          color: var(--white);
-        }
-
         @media (max-width: ${BREAKPOINTS.tab}) {
           section {
-            padding: 80% var(--mobile-padding) 10rem;
+            padding: 60% var(--mobile-padding) 4rem;
+            height: 60vh;
+          }
+          video {
+            height: 75vh;
+          }
+          .overlay {
+            height: 75vh;
+          }
+          .text {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
           }
           .text h1 {
-            font-size: 4.2rem;
-            line-height: 4.8rem;
+            font-size: 4rem;
+            line-height: 4.4rem;
           }
           .text h4 {
             font-size: 2rem;

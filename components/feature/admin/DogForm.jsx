@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 // components
 import Input from '@shared/inputs/Input';
@@ -21,19 +22,24 @@ const genderOptions = [
 const selectionOptions = [
   { id: 1, name: 'Seleccion I', value: 'Seleccion I' },
   { id: 2, name: 'Seleccion I  - IGP1', value: 'Seleccion I  - IGP1' },
-  { id: 2, name: 'Seleccion II', value: 'Seleccion II ' },
+  { id: 3, name: 'Seleccion II', value: 'Seleccion II ' },
 ];
 
 const ComposeDog = ({ closeModal }) => {
-  const { filesUrl, loading: imgLoading, upload, deleteFile } = useUploadFile();
+  const [name, setName] = useState('unknow');
+  const { filesUrl, loading: imgLoading, upload, deleteFile } = useUploadFile('dogs', name);
   const { createDog, loading, error } = useDogs();
   const {
     handleSubmit,
     register,
     formState: { errors },
+    getValues,
   } = useForm({
     defaultValues: {
       last_name: 'Von der Grubem Land',
+      femaleParent: 'Madre',
+      maleParent: 'Padre',
+      selection: 'Seleccion I',
     },
   });
 
@@ -51,6 +57,7 @@ const ComposeDog = ({ closeModal }) => {
           placeholder="Nombre"
           disabled={loading.create}
           errorMessage={errors.first_name}
+          onChange={(e) => setName(e.target.value)}
           ref={register('first_name', {
             required: {
               value: true,
@@ -124,6 +131,7 @@ const ComposeDog = ({ closeModal }) => {
           onChange={upload}
           deleteFile={deleteFile}
           loading={imgLoading}
+          subFolder={name}
         />
 
         <Separator />
@@ -140,7 +148,7 @@ const ComposeDog = ({ closeModal }) => {
               message: newMessage.required,
             },
           })}
-        />       
+        />
 
         {/* <DropdownSearch
           label="Categoria"

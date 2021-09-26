@@ -11,7 +11,7 @@ const ModalWrapper = ({
   children,
   title,
   width = '36vw',
-  height = '80vh',
+  height = '88vh',
 }) => {
   useLockBodyScroll();
 
@@ -149,6 +149,7 @@ const ModalWrapper = ({
             position: relative;
             max-height: ${height};
             max-width: ${width};
+            min-width: 60rem;
             margin-top: 2rem;
             overflow: auto;
             box-shadow: var(--modal-shadow);

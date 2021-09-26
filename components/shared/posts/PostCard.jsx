@@ -6,29 +6,22 @@ import { BREAKPOINTS } from 'utils/breakpoints';
 import useTimeAgo from 'hooks/useTimeAgo';
 import Placholder from '@shared/svgs/placeholder';
 
-const no_op = () => {};
-
-const DogCard = ({
-  picture,
-  first_name = 'Von der Grubem Land',
-  dateOfBirth = 1630163183,
-  gender = 'male',
-  available,
+const PostCard = ({
+  poster,
+  title = 'Titulo de la publicacion ejemplo',
+  createdAt = 1630163183,
+  category = 'Preñez',
 }) => {
-  const dogGender = gender === 'female' ? 'Hembra' : 'Macho';
-
-  const timeago = useTimeAgo(dateOfBirth);
-  const age = timeago.replace('hace', '');
+  const timeago = useTimeAgo(createdAt);
 
   return (
     <>
       <li>
         <div className="picture">
-          {available && <div>Disponible</div>}
-          {picture ? (
+          {poster ? (
             <img
-              src={picture}
-              alt={`Fotografia de ${first_name}`}
+              src={poster}
+              alt={`Portada de la publicacion ${title}`}
               loading="lazy"
             />
           ) : (
@@ -41,15 +34,18 @@ const DogCard = ({
         </div>
 
         <div className="info">
-          <h3>{first_name}</h3>
-          <p>{`${dogGender} • ${age}`}</p>
+          <h3>{title}</h3>
+          <p>{timeago}</p>
         </div>
       </li>
 
       <style jsx>{`
         li {
-          margin: 2px;
+          display: grid;
+          grid-template-columns: auto 1fr;
           cursor: pointer;
+          padding-bottom: 1.2rem;
+          overflow: hidden;
         }
         li:last-child {
           margin: 2px 0;
@@ -57,16 +53,15 @@ const DogCard = ({
 
         .picture {
           position: relative;
-          width: 26rem;
+          width: 10rem;
           height: auto;
-          aspect-ratio: 4 / 3;
+          aspect-ratio: 1 / 1;
           overflow: hidden;
           border-radius: 4px;
         }
         .picture > div {
           position: absolute;
           top: 8px;
-          right: 8px;
 
           color: var(--white);
           font-size: 1.2rem;
@@ -83,7 +78,7 @@ const DogCard = ({
           border-radius: 4px;
           object-fit: cover;
           object-position: center;
-          transition: all 2s ease;
+          transition: all 0.6s ease;
         }
         .picture:hover > img {
           transform: scale(1.15);
@@ -96,30 +91,46 @@ const DogCard = ({
           width: 100%;
           height: 100%;
           background-color: var(--grey-500);
+          padding: 1.2rem;
         }
         .picture > section > i {
-          width: 14rem;
+          width: 100%;
         }
 
         .info {
-          padding-top: 0.8rem;
+          width: 18rem;
+          padding-left: 1.2rem;
           color: var(--font);
         }
         .info h3 {
-          font-size: 1.6rem;
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          width: 100%;
+
+          font-size: 1.8rem;
           font-weight: 700;
+          line-height: 2rem;
+        }
+        .info p {
+          margin-top: 0.2rem;
         }
 
         @media (min-width: ${BREAKPOINTS.tab}) {
-          li {
-            margin: 2px 3.2rem 2px 0;
-            cursor: pointer;
-          }
           .picture {
-            width: 100%;
+            width: 12rem;
           }
-          .picture > section > i {
-            width: 16rem;
+          .info {
+            width: calc(100% - 2rem);
+          }
+          .info h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            line-height: 2.4rem;
+          }
+          .info p {
+            margin-top: 0.6rem;
           }
         }
       `}</style>
@@ -127,8 +138,8 @@ const DogCard = ({
   );
 };
 
-const DogCardMemo = memo((props) => {
-  return <DogCard {...props} />;
+const PostCardMemo = memo((props) => {
+  return <PostCard {...props} />;
 });
 
-export default DogCardMemo;
+export default PostCardMemo;

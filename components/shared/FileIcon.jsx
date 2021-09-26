@@ -3,7 +3,7 @@ import { FaImages } from 'react-icons/fa';
 
 const FileIcon = ({ name, disabled, onChange }) => {
   const imageHandler = (e) => {
-    onChange('posts', e.target.files );
+    onChange(e.target.files);
   };
 
   return (

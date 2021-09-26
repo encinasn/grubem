@@ -1,3 +1,5 @@
+import { BREAKPOINTS } from 'utils/breakpoints';
+
 const ItemDetail = ({ title, children, first }) => {
   if (!children) return null;
 
@@ -22,6 +24,15 @@ const ItemDetail = ({ title, children, first }) => {
 
         p:last-child {
           font-weight: 600;
+        }
+
+        @media (min-width: ${BREAKPOINTS.tab}) {
+          div {
+            padding: 1.6rem 0;
+          }
+          p {
+            font-size: 1.6rem;
+          }
         }
       `}</style>
     </>

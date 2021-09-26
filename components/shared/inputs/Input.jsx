@@ -17,6 +17,7 @@ const InputDefault = forwardRef(
       errorMessage,
       width = '100%',
       optional,
+      onChange
     },
     ref
   ) => {
@@ -35,7 +36,7 @@ const InputDefault = forwardRef(
               placeholder={placeholder}
               name={name}
               onBlur={ref?.onBlur}
-              onChange={ref?.onChange}
+              onChange={onChange || ref?.onChange}
               ref={ref?.ref}
               disabled={disabled}
               autoComplete="off"

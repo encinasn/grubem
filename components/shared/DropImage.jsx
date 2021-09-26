@@ -14,11 +14,12 @@ const DropImage = ({
   files = [],
   onChange,
   deleteFile,
-  loading
+  loading,
+  subFolder
 }) => {
   const onDrop = useCallback((acceptedFiles) => {
-    onChange('dogs', acceptedFiles);
-  }, []);
+    onChange(acceptedFiles);
+  }, [subFolder]);
 
   const { getRootProps, getInputProps, isDragAccept, isDragReject } =
     useDropzone({ accept: 'image/*', maxFiles: 9, onDrop });
@@ -34,7 +35,7 @@ const DropImage = ({
         </div>
       )}
 
-      {loading && <Loading/>}
+      {loading && <Loading />}
 
       <div className="thumb_wrapper">
         {files.map((file) => (

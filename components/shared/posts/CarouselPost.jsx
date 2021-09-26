@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Carrousel, { consts } from 'react-elastic-carousel';
 // components
-import DogCard from './DogCard';
+import PostCard from './PostCard';
 // utils
 import { BREAKPOINTS } from 'utils/breakpoints';
 // icons
@@ -13,31 +13,27 @@ const recBreakPoints = [
     itemsToShow: 1,
   },
   {
-    width: 320,
-    itemsToShow: 1.2,
-  },
-  {
     width: 350,
-    itemsToShow: 1.3,
+    itemsToShow: 1.1,
   },
   {
     width: 385,
-    itemsToShow: 1.4,
+    itemsToShow: 1.3,
   },
   {
     width: 600,
-    itemsToShow: 2.3,
+    itemsToShow: 2,
     itemsToScroll: 2,
   },
   {
     width: 1000,
-    itemsToShow: 3.7,
-    itemsToScroll: 3,
+    itemsToShow: 3,
+    itemsToScroll: 2,
   },
   {
     width: 1200,
-    itemsToShow: 4.7,
-    itemsToScroll: 4,
+    itemsToShow: 3,
+    itemsToScroll: 3,
   },
 ];
 
@@ -47,7 +43,7 @@ const isMobile = () => {
   }
 };
 
-const CarrouselDogs = ({ data }) => {
+const CarrouselPosts = ({ data }) => {
   // const modal = !!router.query[`${type}_id`];
 
   // const openModal = (id) => router.push(`/${id}`, undefined, { scroll: false });
@@ -73,7 +69,7 @@ const CarrouselDogs = ({ data }) => {
 
   return (
     <>
-      <div className="carrousel_wrapper">
+      <div className="carrousel_wrapper_posts">
         <Carrousel
           renderArrow={recArrow}
           breakPoints={recBreakPoints}
@@ -81,23 +77,23 @@ const CarrouselDogs = ({ data }) => {
           enableMouseSwipe={false}
           showArrows={!isMobile()}
           focusOnSelect
-          itemPadding={[0, 24, 0, 0]}
           itemPosition={consts.START}
+          showEmptySlots
+          itemPadding={[0, 24, 0, 0]}
         >
-          {data.map((dog) => (
-            <Link href={`/${dog.id}`} key={dog.id}>
+          {data.map((post) => (
+            <Link href={`/${post.id}`} key={post.id}>
               <a>
-                <DogCard
-                  picture={dog.picture}
-                  first_name={dog.first_name}
-                  dateOfBirth={dog.dateOfBirth}
-                  gender={dog.gender}
-                  available={dog.available}
+                <PostCard
+                  picture={post.picture}
+                  first_name={post.first_name}
+                  dateOfBirth={post.dateOfBirth}
+                  gender={post.gender}
+                  available={post.available}
                 />
               </a>
             </Link>
           ))}
-          {!isMobile() && <div></div>}
         </Carrousel>
       </div>
 
@@ -106,38 +102,43 @@ const CarrouselDogs = ({ data }) => {
           width: 100%;
         }
 
-        .carrousel_wrapper {
+        .carrousel_wrapper_posts {
           width: 100%;
           padding: 0;
         }
-        .carrousel_wrapper .rec.rec-slider-container {
+        .carrousel_wrapper_posts .rec.rec-slider-container {
           margin: 0;
         }
-        .carrousel_wrapper .rec.rec-slider {
+
+        .carrousel_wrapper_posts .rec.rec-slider {
           margin: 0 var(--mobile-padding);
         }
 
         @media screen and (min-width: ${BREAKPOINTS.tab}) {
-          .carrousel_wrapper .rec.rec-slider {
+          .carrousel_wrapper_posts .rec.rec-slider-container {
             margin: 0 var(--desktop-padding);
           }
-          .carrousel_wrapper .rec.rec-carousel {
+          .carrousel_wrapper_posts .rec.rec-slider {
+            margin: 0;
+          }
+          .rec.rec-carousel {
             position: relative;
           }
 
           /* arrow */
 
-          .rec.rec-arrow {
-            visibility: visible;
-            position: absolute;
-            width: var(--desktop-padding);
-            height: 100%;
-            border: none;
-            background: var(--background);
-            color: var(--arrow-slider-color);
-            cursor: pointer;
-            z-index: 10;
+          .carrousel_wrapper_posts .rec.rec-arrow,
+          .carrousel_wrapper_posts .rec.rec-arrow-right:hover,
+          .carrousel_wrapper_posts .rec.rec-arrow-right:hover:enabled,
+          .carrousel_wrapper_posts .rec.rec-arrow-right:focus,
+          .carrousel_wrapper_posts .rec.rec-arrow-right:focus:enabled,
+          .carrousel_wrapper_posts .rec.rec-arrow-left:hover,
+          .carrousel_wrapper_posts .rec.rec-arrow-left:hover:enabled,
+          .carrousel_wrapper_posts .rec.rec-arrow-left:focus,
+          .carrousel_wrapper_posts .rec.rec-arrow-left:focus:enabled {
+            background: none;
           }
+
           .rec.rec-arrow[disabled] {
             visibility: hidden;
           }
@@ -155,32 +156,10 @@ const CarrouselDogs = ({ data }) => {
           .rec.rec-arrow:focus:enabled {
             color: var(--arrow-slider-color);
           }
-          .rec.rec-arrow-left:hover,
-          .rec.rec-arrow-left:hover:enabled,
-          .rec.rec-arrow-left:focus,
-          .rec.rec-arrow-left:focus:enabled {
-            background: var(--arrow-slider-left);
-          }
-          .rec.rec-arrow-right:hover,
-          .rec.rec-arrow-right:hover:enabled,
-          .rec.rec-arrow-right:focus,
-          .rec.rec-arrow-right:focus:enabled {
-            background: var(--arrow-slider-right);
-          }
-
-          .rec.rec-arrow > .arrow-icon {
-            transition: transform 0.3s linear;
-          }
-          .rec.rec-arrow:hover > .arrow-icon,
-          .rec.rec-arrow:hover:enabled > .arrow-icon,
-          .rec.rec-arrow:focus > .arrow-icon,
-          .rec.rec-arrow:focus:enabled > .arrow-icon {
-            transform: scale(1.3);
-          }
         }
       `}</style>
     </>
   );
 };
 
-export default CarrouselDogs;
+export default CarrouselPosts;
