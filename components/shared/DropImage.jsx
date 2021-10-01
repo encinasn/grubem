@@ -15,11 +15,13 @@ const DropImage = ({
   onChange,
   deleteFile,
   loading,
-  subFolder
 }) => {
-  const onDrop = useCallback((acceptedFiles) => {
-    onChange(acceptedFiles);
-  }, [subFolder]);
+  const onDrop = useCallback(
+    (acceptedFiles) => {
+      onChange(acceptedFiles);
+    },
+    [onChange]
+  );
 
   const { getRootProps, getInputProps, isDragAccept, isDragReject } =
     useDropzone({ accept: 'image/*', maxFiles: 9, onDrop });
@@ -28,14 +30,14 @@ const DropImage = ({
     <>
       <Label label={label} name={name} optional={optional} />
 
-      {!files.length && !loading && (
-        <div className="wrapper" {...getRootProps()}>
-          <input {...getInputProps()} />
+      <div className="wrapper" {...getRootProps()}>
+        <input {...getInputProps()} />
+        {loading ? (
+          <Loading />
+        ) : (
           <p>Arrastra y suelta el archivo, o haz click para seleccionarlo</p>
-        </div>
-      )}
-
-      {loading && <Loading />}
+        )}
+      </div>
 
       <div className="thumb_wrapper">
         {files.map((file) => (
@@ -58,7 +60,7 @@ const DropImage = ({
         .wrapper {
           flex: 1;
           flex-direction: column;
-          height: 20rem;
+          height: 14rem;
           width: ${width};
           padding: 0 2rem;
           border-width: 2px;
@@ -84,13 +86,14 @@ const DropImage = ({
           grid-template-columns: repeat(${files.length === 1 ? 1 : 2}, 1fr);
           grid-gap: 0.8rem;
           width: ${width};
+          margin-top: 0.8rem;
         }
         .thumb {
           position: relative;
           width: 100%;
           height: max-content;
           overflow: hidden;
-          margin: 2px 0;
+          margin: 1px;
           border: 1px solid var(--border);
           border-radius: var(--normal-radius);
           aspect-ratio: 4 / 3;

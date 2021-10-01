@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 // icons
@@ -42,166 +41,99 @@ const pages = [
 ];
 
 const Navbar = () => {
-  const [visible, setVisible] = useState(true);
-
   const [enabled, setEnabled] = useDarkMode();
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scroll = window.scrollY;
-
-      if (scroll < 40) {
-        setVisible(true);
-      } else {
-        setVisible(false);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
-  // useEffect(() => {
-  //   if (typeof window !== 'undefined') {
-  //     const hashId = window.location.hash;
-
-  //     if (hashId) {
-  //       const element = document.getElementById(hashId.replace('#', ''));
-  //       if (element) {
-  //         element.scrollIntoView({
-  //           behavior: 'smooth',
-  //           block: 'start',
-  //           inline: 'nearest',
-  //         });
-  //       }
-  //     }
-  //   }
-  // }, []);
 
   return (
     <>
-      <nav className={`transparent ${visible ? 'visible' : ''} `}>
-        <div className="nav-layout">
-          <section className="navigation">
-            <Link href="/#nosotros">
-              <a>
-                Nosotros
-                <div></div>
-              </a>
-            </Link>
+      <nav>
+        <section className="navigation">
+          <Link href="/#nosotros">
+            <a>
+              Nosotros
+              <div></div>
+            </a>
+          </Link>
 
-            <Link href="/#novedades">
-              <a>
-                Novedades
-                <div></div>
-              </a>
-            </Link>
+          <Link href="/#novedades">
+            <a>
+              Novedades
+              <div></div>
+            </a>
+          </Link>
 
-            <Link href="/#contacto">
-              <a>
-                Contacto
-                <div></div>
-              </a>
-            </Link>
-          </section>
+          <Link href="/#contacto">
+            <a>
+              Contacto
+              <div></div>
+            </a>
+          </Link>
+        </section>
 
-          <section>
-            <Link href="/">
-              <a className="logo">
-                <Image
-                  src="/images/brand/logo.png"
-                  alt="Escudo de Von der Grubem Land"
-                  width={100}
-                  height={100}
-                  layout="fixed"
-                  priority
-                />
-              </a>
-            </Link>
-          </section>
+        <section>
+          <Link href="/">
+            <a className="logo">
+              <Image
+                src="/images/brand/logo.png"
+                alt="Escudo de Von der Grubem Land"
+                width={120}
+                height={120}
+                layout="fixed"
+                priority
+              />
+            </a>
+          </Link>
+        </section>
 
-          <section className="navigation">
-            <Link href="/#cachorros">
-              <a>
-                Cachorros
-                <div></div>
-              </a>
-            </Link>
+        <section className="navigation">
+          <Link href="/#cachorros">
+            <a>
+              Cachorros
+              <div></div>
+            </a>
+          </Link>
 
-            <Link href="/#machos">
-              <a>
-                Machos
-                <div></div>
-              </a>
-            </Link>
+          <Link href="/#machos">
+            <a>
+              Machos
+              <div></div>
+            </a>
+          </Link>
 
-            <Link href="/#hembras">
-              <a>
-                Hembras
-                <div></div>
-              </a>
-            </Link>
-          </section>
-        </div>
+          <Link href="/#hembras">
+            <a>
+              Hembras
+              <div></div>
+            </a>
+          </Link>
+        </section>
       </nav>
 
       <style jsx>{`
-        /* Logo */
-
-        /* Navbar */
-
         nav {
-          position: fixed;
-          top: -14rem;
+          position: absolute;
+          top: 0;
+          left: 0;
+
+          display: flex;
+          justify-content: center;
+          align-items: center;
 
           height: max-content;
-          max-height: 100vh;
           width: 100vw;
-          padding: 0 var(--mobile-padding);
-          z-index: 50;
-          transition: top 0.2s ease;
-        }
-        nav.visible {
-          top: 0;
-        }
+          padding: 1.6rem var(--desktop-padding);
 
-        nav > .nav-layout {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          height: 10rem;
-          width: 100%;
-          transition: all 0.2s linear;
-        }
-        nav.transparent > .nav-layout {
-          height: 14rem;
           color: var(--white);
-        }
-
-        nav.transparent {
           background: linear-gradient(
             180deg,
             rgba(32, 32, 32, 0.8998949921765581) 0%,
             rgba(32, 32, 32, 0) 100%
           );
+          z-index: 50;
+
         }
 
         a.logo {
           margin: 0 5.2rem;
-        }
-
-        nav {
-          padding: 0 var(--desktop-padding);
-        }
-        nav > .nav-layout {
-          justify-content: center;
-        }
-
-        nav.active {
-          padding: 0 2rem;
         }
 
         .navigation {
@@ -222,11 +154,8 @@ const Navbar = () => {
           width: 0;
           opacity: 0;
           border-radius: 1000px;
-          background-color: var(--font);
-          transition: all 0.25s linear;
-        }
-        nav.transparent .navigation a div {
           background-color: var(--red);
+          transition: all 0.25s linear;
         }
 
         .navigation > a:hover > div {
