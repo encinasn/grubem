@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+/* eslint-disable @next/next/no-img-element */
+import { useState } from 'react';
 import Link from 'next/link';
 // icons
 import { BiMenu, BiX } from 'react-icons/bi';
@@ -39,58 +40,34 @@ const pages = [
 ];
 
 const NavbarMobile = () => {
-  const [visible, setVisible] = useState(true);
   const [active, setActive] = useState(false);
 
   const [enabled, setEnabled] = useDarkMode();
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const scroll = window.scrollY;
+  // useEffect(() => {
+  //   if (typeof window !== 'undefined') {
+  //     const hashId = window.location.hash;
 
-      if (scroll < 80) {
-        setVisible(true);
-      } else {
-        setVisible(false);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const hashId = window.location.hash;
-
-      if (hashId) {
-        const element = document.getElementById(hashId.replace('#', ''));
-        if (element) {
-          element.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start',
-            inline: 'nearest',
-          });
-        }
-      }
-    }
-  }, []);
+  //     if (hashId) {
+  //       const element = document.getElementById(hashId.replace('#', ''));
+  //       if (element) {
+  //         element.scrollIntoView({
+  //           behavior: 'smooth',
+  //           block: 'start',
+  //           inline: 'nearest',
+  //         });
+  //       }
+  //     }
+  //   }
+  // }, []);
 
   const handleClick = () => setActive(!active);
 
   return (
     <>
-      <nav
-        className={`
-        ${!active ? 'transparent' : 'background'} 
-        ${visible ? 'visible' : ''} 
-        ${active && !visible ? 'active visible' : active ? 'active' : ''}`}
-      >
-        <div className="nav-layout">
-          <section className="logo">
+      <nav className={active ? 'active background' : 'transparent'}>
+        <div className="layout">
+          <section className="navigation">
             <img
               src="/images/brand/logo.png"
               alt="Escudo de Von der Grubem Land"
@@ -119,51 +96,37 @@ const NavbarMobile = () => {
       </nav>
 
       <style jsx>{`
-        /* Logo */
-
-        .logo {
+        .navigation {
           width: 7rem;
           height: 7rem;
           overflow: hidden;
         }
-        .logo > img {
+        img {
           width: 100%;
           height: 100%;
           object-fit: cover;
           object-position: center;
         }
 
-        /* NavbarMobile */
-
         nav {
-          position: fixed;
-          top: -14rem;
+          position: absolute;
+          top: 0;
 
           height: max-content;
           max-height: 100vh;
           width: 100vw;
           padding: 0 var(--mobile-padding);
           z-index: 50;
-          transition: top 0.2s ease;
-        }
-        nav.visible {
-          top: 0;
         }
 
-        nav > .nav-layout {
+        nav > .layout {
           display: flex;
+          flex-direction: row;
           justify-content: space-between;
           align-items: center;
           height: 8rem;
           width: 100%;
           transition: all 0.2s linear;
-        }
-        nav.transparent > .nav-layout {
-          height: 10rem;
-          color: var(--white);
-        }
-        nav.background > .nav-layout {
-          height: 8rem;
           color: var(--font);
         }
 

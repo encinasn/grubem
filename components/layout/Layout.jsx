@@ -14,7 +14,7 @@ const isMobile = () => {
 const Layout = ({ children }) => {
   return (
     <>
-      {isMobile() ? <NavbarMobile /> : <Navbar />}
+      {!isMobile() ? <Navbar /> : <NavbarMobile />}
 
       <main>
         {children}

@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 // layout
 import Layout from '@layout/Layout';
 // components
@@ -8,6 +8,7 @@ import CarouselDogs from '@feature/home/CarouselDogs';
 import CarouselPosts from '@feature/home/CarouselPosts';
 // services
 import { getDogs, getPosts } from 'firebase/client';
+import Intro from '@feature/home/Intro';
 
 const HomePage = ({ posts, dogs }) => {
   return (
@@ -21,6 +22,8 @@ const HomePage = ({ posts, dogs }) => {
           />
           <meta name="keywords" content="perros, ovejeros, ovejeros alemanes" />
         </Head>
+
+        <Intro />
 
         <LandingVideo />
 

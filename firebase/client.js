@@ -149,7 +149,12 @@ export const getDogById = async (id) => {
 export const uploadFiles = async (folder, subFolder, files) => {
   let tasks = [];
 
-  return compressFiles(files)
+  return compressFiles({
+    files: files,
+    quality: 0.8,
+    width: 1280,
+    wait: files.length > 2 ? 1000 * files.length : 1000,
+  })
     .then((compressedFiles) => {
       for (let file of compressedFiles) {
         const task = firebase
@@ -163,44 +168,27 @@ export const uploadFiles = async (folder, subFolder, files) => {
         tasks.push(task);
       }
     })
-    .then(() => Promise.all(tasks).then((links) => links));
-};
-
-const compressFiles = async (files) => {
-  return new Promise((resolve, reject) => {
-    let compressedFiles = [];
-
-    for (let file of files) {
-      new Compressor(file, {
-        quality: 0.8,
-        width: 1280,
-        success(result) {
-          //console.dir({ original: file.size, comprimido: result.size });
-          compressedFiles.push(result);
-        },
-      });
-    }
-
-    const time = files.length > 2 ? 500 * files.length : 1000;
-
-    setTimeout(() => {
-      resolve(compressedFiles);
-    }, time);
-  });
+    .then(() => Promise.all(tasks).then((links) => links))
+    .catch((err) => console.log(err));
 };
 
 // ======================= Cover
 
-export const uploadCover = async (folder, subFolder, files) => {
+export const uploadCov = async (folder, subFolder, files) => {
   let tasks = [];
 
-  return compressCover(files)
+  return compressFiles({
+    files: files,
+    quality: 0.4,
+    width: 600,
+    minSize: 600000,
+  })
     .then((compressedFiles) => {
       for (let file of compressedFiles) {
         const task = firebase
           .storage()
           .ref()
-          .child(`${folder}/${subFolder}/${file.name}`)
+          .child(`${folder}/${subFolder}/cover-${file.name}`)
           .put(file)
           .then((snap) => snap.ref.getDownloadURL())
           .catch((err) => console.log(err));
@@ -208,25 +196,43 @@ export const uploadCover = async (folder, subFolder, files) => {
         tasks.push(task);
       }
     })
-    .then(() => Promise.all(tasks).then((links) => links));
+    .then(() => Promise.all(tasks).then((links) => links))
+    .catch((err) => console.log(err));
 };
 
-const compressCover = async (files) => {
+// ======================= COMPPRESS
+
+const compressFiles = async ({
+  files,
+  quality,
+  width,
+  wait = 1000,
+  minSize = 900000,
+}) => {
   return new Promise((resolve, reject) => {
     let compressedFiles = [];
 
     for (let file of files) {
-      new Compressor(file, {
-        quality: 0.4,
-        width: 800,
-        success(result) {
-          compressedFiles.push(result);
-        },
-      });
+      if (file.size > minSize) {
+        new Compressor(file, {
+          quality: quality,
+          width: width,
+          success(result) {
+            //console.dir({ original: file.size, comprimido: result.size });
+            if (file.size > result.size) {
+              compressedFiles.push(result);
+            } else {
+              compressedFiles.push(file);
+            }
+          },
+        });
+      } else {
+        compressedFiles.push(file);
+      }
     }
 
     setTimeout(() => {
       resolve(compressedFiles);
-    }, 1000);
+    }, wait);
   });
 };

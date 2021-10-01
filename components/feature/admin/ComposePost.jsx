@@ -5,12 +5,13 @@ import Textarea from '@shared/posts/TextareaPosts';
 import FileIcon from '@shared/FileIcon';
 import PostImage from '@shared/posts/PostImage';
 import Button from '@shared/Button';
+import Separator from '@shared/Separator';
+import DropImage from '@shared/DropImage';
 // utils
 import { BREAKPOINTS } from 'utils/breakpoints';
 // hooks
 import usePosts from 'hooks/usePosts';
 import useUploadFile from 'hooks/useUploadFile';
-import DropImage from '@shared/DropImage';
 
 const ComposePost = ({ closeModal }) => {
   const [content, setContent] = useState('');
@@ -55,6 +56,8 @@ const ComposePost = ({ closeModal }) => {
           value={content}
           disabled={loading.create}
         />
+
+        <Separator />
 
         {coverUrl.length > 0 &&
           coverUrl.map((img) => (

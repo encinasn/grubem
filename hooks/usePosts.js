@@ -16,9 +16,9 @@ const usePosts = (preloadPosts = []) => {
   const [error, setError] = useState(INITIAL_STATE);
   const [success, setSuccess] = useState(INITIAL_STATE);
 
-  useEffect(() => {
-    if (!posts.length) getAllPosts();
-  }, []);
+  // useEffect(() => {
+  //   if (!posts.length) getAllPosts();
+  // }, []);
 
   const getAllPosts = async () => {
     setLoading({...loading, get: true});

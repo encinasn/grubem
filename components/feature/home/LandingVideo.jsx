@@ -12,7 +12,7 @@ const LandingVideo = () => {
           src="/videos/landing.mp4"
           muted
           autoPlay
-          // poster="" imagen que se muestra si el video no se esta reproduciendo
+          //poster="/images/photos/landing.jpg"
         ></video>
 
         <div className="overlay"></div>

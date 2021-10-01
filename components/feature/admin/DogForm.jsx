@@ -13,6 +13,7 @@ import useDogs from 'hooks/useDogs';
 import useUploadFile from 'hooks/useUploadFile';
 import RadioButtons from '@shared/RadioButton';
 import DropImage from '@shared/DropImage';
+import FileIcon from '@shared/FileIcon';
 
 const genderOptions = [
   { id: 1, name: 'Macho', value: 'male' },
@@ -27,24 +28,29 @@ const selectionOptions = [
 
 const ComposeDog = ({ closeModal }) => {
   const [name, setName] = useState('unknow');
-  const { filesUrl, loading: imgLoading, upload, deleteFile } = useUploadFile('dogs', name);
+  const {
+    filesUrl,
+    coverUrl,
+    loading: imgLoading,
+    upload,
+    uploadCover,
+    deleteFile,
+  } = useUploadFile('dogs', name);
+
   const { createDog, loading, error } = useDogs();
+
   const {
     handleSubmit,
     register,
     formState: { errors },
-    getValues,
   } = useForm({
     defaultValues: {
       last_name: 'Von der Grubem Land',
-      femaleParent: 'Madre',
-      maleParent: 'Padre',
-      selection: 'Seleccion I',
     },
   });
 
   const onSubmit = async (data) => {
-    await createDog({ ...data, picture: filesUrl });
+    await createDog({ ...data, picture: filesUrl, cover: coverUrl });
     if (!error.create) closeModal();
   };
 
@@ -89,7 +95,7 @@ const ComposeDog = ({ closeModal }) => {
         />
 
         <RadioButtons
-          label="Genero"
+          label="Sexo"
           name="gender"
           options={genderOptions}
           disabled={loading.create}
@@ -124,13 +130,24 @@ const ComposeDog = ({ closeModal }) => {
           ref={register('available')}
         />
 
+        <Separator />
+
+        <section className="add-to-post">
+          <span>Seleccionar portada</span>
+          <FileIcon
+            name="cover"
+            onChange={uploadCover}
+            disabled={loading.create}
+          />
+        </section>
+
         <DropImage
           label="Imagenes"
           name="picture"
           files={filesUrl}
           onChange={upload}
           deleteFile={deleteFile}
-          loading={imgLoading}
+          loading={imgLoading.images}
           subFolder={name}
         />
 
@@ -149,26 +166,6 @@ const ComposeDog = ({ closeModal }) => {
             },
           })}
         />
-
-        {/* <DropdownSearch
-          label="Categoria"
-          name="product_category"
-          prompt="Seleccionar categoria"
-          disabled={isLoading}
-          options={listCategories}
-          id="id"
-          atribute="name"
-          value={category}
-          onChange={setCategory}
-          setValue={setValue}
-          errorMessage={errors.product_category}
-          ref={register('product_category', {
-            required: {
-              value: true,
-              message: newMessage.required,
-            },
-          })}
-        /> */}
 
         <Input
           label="Madre"
@@ -224,7 +221,7 @@ const ComposeDog = ({ closeModal }) => {
           label="Url de PedigreeDB"
           type="url"
           name="pedigreeUrl"
-          placeholder="pedigreedatabase.com/"
+          placeholder="http://www.pedigreedatabase.com"
           disabled={loading.create}
           errorMessage={errors.pedigreeUrl}
           ref={register('pedigreeUrl')}
@@ -266,6 +263,17 @@ const ComposeDog = ({ closeModal }) => {
           align-items: center;
           grid-template: auto / 1fr auto auto;
           padding: 0.4rem 1.2rem;
+          width: 100%;
+          border: 1px solid var(--border);
+          border-radius: var(--normal-radius);
+        }
+
+        .add-to-post {
+          display: grid;
+          align-items: center;
+          grid-template: auto / 1fr auto auto;
+          padding: 0.4rem 1.2rem;
+          margin-bottom: 0.8rem;
           width: 100%;
           border: 1px solid var(--border);
           border-radius: var(--normal-radius);

@@ -1,23 +1,24 @@
 import { useState } from 'react';
 // services
-import { uploadFiles } from 'firebase/client';
+import { uploadFiles, uploadCov } from 'firebase/client';
 
 const useUploadFile = (folder, subFolder) => {
   const [filesUrl, setFilesUrl] = useState([]);
-  const [coverUrl, setCoverUrl] = useState([]);
+  const [coverUrl, setCoverUrl] = useState('');
   const [loading, setLoading] = useState({ images: false, cover: false });
-
+  
   const upload = async (files) => {
     setLoading({ ...loading, images: true });
     const links = await uploadFiles(folder, subFolder, files);
-    setFilesUrl(links);
+    const data = [...filesUrl, ...links]
+    setFilesUrl(data);
     setLoading({ ...loading, images: false });
   };
 
-  const uploadCover = async (files) => {
+  const uploadCover = async (cover) => {
     setLoading({ ...loading, cover: true });
-    const link = await uploadFiles(folder, subFolder, files);
-    setCoverUrl(link);
+    const link = await uploadCov(folder, subFolder, cover);
+    setCoverUrl(link[0]);
     setLoading({ ...loading, cover: false });
   };
 
@@ -26,7 +27,7 @@ const useUploadFile = (folder, subFolder) => {
   };
 
   const deleteCover = () => {
-    setCoverUrl([]);
+    setCoverUrl('');
   };
 
   return {

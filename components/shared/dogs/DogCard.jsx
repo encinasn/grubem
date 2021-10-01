@@ -9,7 +9,7 @@ import Placholder from '@shared/svgs/placeholder';
 const no_op = () => {};
 
 const DogCard = ({
-  picture,
+  cover,
   first_name = 'Von der Grubem Land',
   dateOfBirth = 1630163183,
   gender = 'male',
@@ -25,9 +25,9 @@ const DogCard = ({
       <li>
         <div className="picture">
           {available && <div>Disponible</div>}
-          {picture ? (
+          {cover ? (
             <img
-              src={picture}
+              src={cover}
               alt={`Fotografia de ${first_name}`}
               loading="lazy"
             />

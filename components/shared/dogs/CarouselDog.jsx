@@ -48,11 +48,6 @@ const isMobile = () => {
 };
 
 const CarrouselDogs = ({ data }) => {
-  // const modal = !!router.query[`${type}_id`];
-
-  // const openModal = (id) => router.push(`/${id}`, undefined, { scroll: false });
-  // const closeModal = () => router.replace('/', undefined, { scroll: false });
-
   function recArrow({ type, onClick, isEdge }) {
     return (
       <button
@@ -88,7 +83,7 @@ const CarrouselDogs = ({ data }) => {
             <Link href={`/${dog.id}`} key={dog.id}>
               <a>
                 <DogCard
-                  picture={dog.picture}
+                  cover={dog.picture[0]}
                   first_name={dog.first_name}
                   dateOfBirth={dog.dateOfBirth}
                   gender={dog.gender}

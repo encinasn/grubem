@@ -16,9 +16,9 @@ const usePosts = (preloadDogs = { male: [], female: [], puppy: [] }) => {
   const [error, setError] = useState(INITIAL_STATE);
   const [success, setSuccess] = useState(INITIAL_STATE);
 
-  useEffect(() => {
-    if (!dogs.male.length) getAllDogs();
-  }, []);
+  // useEffect(() => {
+  //   if (!dogs.male.length) getAllDogs();
+  // }, []);
 
   const getAllDogs = async () => {
     setLoading({ ...loading, get: true });
