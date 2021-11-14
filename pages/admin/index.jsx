@@ -56,7 +56,7 @@ const AdminPage = () => {
           Nueva publicación
         </AdminButton>
         <AdminButton onClick={openModalDog} type="dog">
-          Registrar Perro
+          Registrar Ejemplar
         </AdminButton>
         <AdminButton onClick={goHome} type="gohome">
           Ir a la pagina

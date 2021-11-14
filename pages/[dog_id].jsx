@@ -151,7 +151,6 @@ const DogPage = ({ dog }) => {
           width: 100vw;
           height: 100%;
           min-height: 100vh;
-          border-radius: var(--normal-radius);
           background-color: var(--background);
           z-index: 200;
         }

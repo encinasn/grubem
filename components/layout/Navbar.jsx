@@ -1,7 +1,7 @@
 import Link from 'next/link';
-import Image from 'next/image';
 // icons
 import { HiMenu, HiX } from 'react-icons/hi';
+import Logo from '@shared/Logo';
 // utils
 import { BREAKPOINTS } from 'utils/breakpoints';
 //hook
@@ -46,6 +46,14 @@ const Navbar = () => {
   return (
     <>
       <nav>
+        <section>
+          <Link href="/">
+            <a className="logo">
+              <Logo/>
+            </a>
+          </Link>
+        </section>
+
         <section className="navigation">
           <Link href="/#nosotros">
             <a>
@@ -61,50 +69,20 @@ const Navbar = () => {
             </a>
           </Link>
 
+          <Link href="/#cachorros">
+            <a>
+              Ejemplares
+              <div></div>
+            </a>
+          </Link>
+
           <Link href="/#contacto">
             <a>
               Contacto
               <div></div>
             </a>
           </Link>
-        </section>
 
-        <section>
-          <Link href="/">
-            <a className="logo">
-              <Image
-                src="/images/brand/logo.png"
-                alt="Escudo de Von der Grubem Land"
-                width={120}
-                height={120}
-                layout="fixed"
-                priority
-              />
-            </a>
-          </Link>
-        </section>
-
-        <section className="navigation">
-          <Link href="/#cachorros">
-            <a>
-              Cachorros
-              <div></div>
-            </a>
-          </Link>
-
-          <Link href="/#machos">
-            <a>
-              Machos
-              <div></div>
-            </a>
-          </Link>
-
-          <Link href="/#hembras">
-            <a>
-              Hembras
-              <div></div>
-            </a>
-          </Link>
         </section>
       </nav>
 
@@ -115,7 +93,7 @@ const Navbar = () => {
           left: 0;
 
           display: flex;
-          justify-content: center;
+          justify-content: space-between;
           align-items: center;
 
           height: max-content;
@@ -125,15 +103,10 @@ const Navbar = () => {
           color: var(--white);
           background: linear-gradient(
             180deg,
-            rgba(32, 32, 32, 0.8998949921765581) 0%,
-            rgba(32, 32, 32, 0) 100%
+            rgba(0, 0, 0, 0.6) 0%,
+            rgba(0, 0, 0, 0) 100%
           );
           z-index: 50;
-
-        }
-
-        a.logo {
-          margin: 0 5.2rem;
         }
 
         .navigation {

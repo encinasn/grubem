@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 // layout
 import Layout from '@layout/Layout';
 // components
-import LandingVideo from '@feature/home/LandingVideo';
+import LandingVideo from '@feature/home/Landing';
 import CarouselDogs from '@feature/home/CarouselDogs';
 import CarouselPosts from '@feature/home/CarouselPosts';
 // services
@@ -20,7 +20,7 @@ const HomePage = ({ posts, dogs }) => {
             name="description"
             content="Criadero de perros ovejeros alemanes..."
           />
-          <meta name="keywords" content="perros, ovejeros, ovejeros alemanes" />
+          <meta name="keywords" content="perros, cachorros, ovejeros alemanes" />
         </Head>
 
         <Intro />
