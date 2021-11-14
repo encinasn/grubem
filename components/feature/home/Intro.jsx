@@ -34,7 +34,7 @@ const Intro = () => {
 
   return (
     <>
-      <video src="/videos/intro.mp4" muted autoPlay></video>
+      <video className={visible ? 'visible' : 'hidden'} src="/videos/intro.mp4" muted autoPlay></video>
 
       <style jsx>{`
         video {
@@ -51,7 +51,10 @@ const Intro = () => {
 
           animation: outroOpacity;
           animation-duration: 0.6s;
-          animation-delay: 6.2s;
+          animation-delay: 6.5s;
+        }
+        video.hidden {
+          opacity: 0;
         }
 
         @keyframes outroOpacity {
