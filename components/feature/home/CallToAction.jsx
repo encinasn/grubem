@@ -25,7 +25,7 @@ const ScrollToSection = ({children}) => {
           font-weight: 500;
           margin-top: 1.6rem;
           color: var(--white);
-          letter-spacing: 3px;
+          letter-spacing: 2px;
           transition: 0.2s;
           border-radius: var(--normal-radius);
           outline: none;

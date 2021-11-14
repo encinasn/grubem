@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { BiMenu, BiX } from 'react-icons/bi';
 //hook
 import useDarkMode from 'hooks/useDarkMode';
+import Logo from '@shared/Logo';
 
 const pages = [
   {
@@ -66,34 +67,27 @@ const NavbarMobile = () => {
   return (
     <>
       <nav className={active ? 'active background' : 'transparent'}>
-        <div className="layout">
-          <section className="navigation">
-            <img
-              src="/images/brand/logo.png"
-              alt="Escudo de Von der Grubem Land"
-            />
-          </section>
+        <Logo height={64} />
 
-          <section
-            className={`toggle ${active ? 'active' : ''}`}
-            onClick={handleClick}
-          >
-            {active ? <BiX size="4rem" /> : <BiMenu size="4rem" />}
-          </section>
-        </div>
-
-        <div className={`menu ${active ? 'active' : ''}`}>
-          <ul>
-            {pages.map(({ id, name, path }) => (
-              <li key={id}>
-                <Link href={path}>
-                  <a>{name}</a>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <section
+          className={`toggle ${active ? 'active' : ''}`}
+          // onClick={handleClick}
+        >
+          {active ? <BiX size="4rem" /> : <BiMenu size="4rem" />}
+        </section>
       </nav>
+
+      <div className={`menu ${active ? 'active' : ''}`}>
+        <ul>
+          {pages.map(({ id, name, path }) => (
+            <li key={id}>
+              <Link href={path}>
+                <a>{name}</a>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
 
       <style jsx>{`
         .navigation {
@@ -112,29 +106,26 @@ const NavbarMobile = () => {
           position: absolute;
           top: 0;
 
-          height: max-content;
-          max-height: 100vh;
-          width: 100vw;
-          padding: 0 var(--mobile-padding);
-          z-index: 50;
-        }
-
-        nav > .layout {
           display: flex;
           flex-direction: row;
           justify-content: space-between;
           align-items: center;
+
           height: 8rem;
-          width: 100%;
-          transition: all 0.2s linear;
+          width: 100vw;
+          padding: 0 var(--mobile-padding);
+          
           color: var(--font);
+          transition: all 0.2s linear;
+          z-index: 50;
         }
 
+     
         nav.transparent {
           background: linear-gradient(
             180deg,
-            rgba(32, 32, 32, 0.8998949921765581) 0%,
-            rgba(32, 32, 32, 0) 100%
+            rgba(0, 0, 0, 0.4) 0%,
+            rgba(0, 0, 0, 0) 100%
           );
         }
         nav.background {
@@ -150,6 +141,7 @@ const NavbarMobile = () => {
           width: 4rem;
           height: 4rem;
           cursor: pointer;
+          color: var(--white);
         }
 
         /* Menu */

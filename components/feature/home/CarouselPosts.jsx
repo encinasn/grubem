@@ -10,14 +10,12 @@ const CarouselPosts = ({ preloadPosts }) => {
 
   return (
     <>
-      <div className="gradient">
-        <Section id="novedades" gradient>
-          <TitleSection variant="h2" section="Criadero" margin="1.2rem">
-            Novedades
-          </TitleSection>
-        </Section>
-        <Carousel data={[1, 2, 3, 4, 1, 1, 1, 1]} />
-      </div>
+      <Section id="novedades" top="2rem">
+        <TitleSection variant="h2" section="Criadero" margin="1.2rem">
+          Novedades
+        </TitleSection>
+      </Section>
+      <Carousel data={[1, 2, 3, 4, 1, 1, 1, 1]} />
     </>
   );
 };
